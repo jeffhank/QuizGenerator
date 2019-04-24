@@ -3,5 +3,7 @@
 .button {
 	-fx-focus-color: transparent;
 	-fx-faint-focus-color: transparent;
-	
+	-fx-padding: 25px;
+	-fx-border-insets: 12px;
+    -fx-background-insets: 12px;
 }

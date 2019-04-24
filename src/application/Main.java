@@ -28,11 +28,13 @@ public class Main extends Application {
 			primaryStage.show();
 			
 			Label titleLabel = new Label("Quiz Generator");
+			titleLabel.setPadding(new Insets(12));
 			titleLabel.setStyle("-fx-font: 30 arial;");
 			root.setTop(titleLabel);
 			root.setAlignment(titleLabel, Pos.CENTER);
 			
 			GridPane topicGrid = new GridPane();
+			topicGrid.setPadding(new Insets(12, 12, 12, 12));
 			Label topicTitle = new Label("Select Topics");
 			topicTitle.setStyle("-fx-font: 18 arial;");
 			topicGrid.add(topicTitle, 0, 0);
@@ -44,9 +46,15 @@ public class Main extends Application {
 	    root.setLeft(topicGrid);
 			topicGrid.setAlignment(Pos.CENTER_LEFT);
 			
+			GridPane buttonGrid = new GridPane();
 			Button addQuestionsButton = new Button("Add Questions");
-			addQuestionsButton.setId("aqb");
-			root.setCenter(addQuestionsButton);
+	    Button generateButton = new Button("Generate Quiz");
+	    generateButton.setId("gb");
+	    buttonGrid.add(addQuestionsButton, 0, 0);
+	    buttonGrid.add(generateButton, 0, 1);
+	    buttonGrid.setVgap(10.0);
+			root.setCenter(buttonGrid);
+			buttonGrid.setAlignment(Pos.CENTER);
 			
 			GridPane numQuestionsPane = new GridPane();
 			Label numQuestionsLabel = new Label("How many questions?");
@@ -66,12 +74,10 @@ public class Main extends Application {
 			numQuestionsPane.add(numQuestionsLabel, 0, 0);
 			numQuestionsPane.add(numQuestions, 0, 1);
 			numQuestionsPane.setVgap(10.0);
+			numQuestionsPane.setPadding(new Insets(12));
 			root.setRight(numQuestionsPane);
 			numQuestionsPane.setAlignment(Pos.CENTER_RIGHT);
 			
-			Button generateButton = new Button("Generate Quiz");
-			root.setBottom(generateButton);
-			root.setAlignment(generateButton, Pos.BOTTOM_CENTER);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
