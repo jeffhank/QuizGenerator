@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -44,6 +43,8 @@ public class StartPane extends BorderPane {
     GridPane buttonGrid = new GridPane();
     Button addQuestionsButton = new Button("Add Questions");
     Button generateButton = new Button("Generate Quiz");
+
+    generateButton.setOnAction(a -> application.switchScreen(AppScreen.END_SCREEN));
     generateButton.setId("gb");
     buttonGrid.add(addQuestionsButton, 0, 0);
     buttonGrid.add(generateButton, 0, 1);
@@ -74,6 +75,5 @@ public class StartPane extends BorderPane {
     numQuestionsPane.setAlignment(Pos.CENTER_RIGHT);
 
     this.setStyle("-fx-background-color: #FFFFFF;");
-
   }
 }
