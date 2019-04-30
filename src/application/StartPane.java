@@ -18,6 +18,7 @@ public class StartPane extends BorderPane {
   public StartPane(QuizApplication application) {
     this.application = application;
     setupLayout();
+
   }
 
   private void setupLayout() {
