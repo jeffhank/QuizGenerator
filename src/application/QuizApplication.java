@@ -12,7 +12,6 @@ import java.util.List;
 public class QuizApplication extends Application {
 
   List<Pair<Pane, Scene>> screens;
-  int showingScreenIndex;
   final int WINDOW_WIDTH = 800;
   final int WINDOW_HEIGHT = 600;
   private Stage primaryStage;
@@ -42,6 +41,9 @@ public class QuizApplication extends Application {
     switchScreen(AppScreen.START_SCREEN);
   }
 
+  // This function uses the primaryStage we stored earlier to switch scenes. This has the
+  // advantage that every Pane object which also contains a reference to this class (such as all
+  // the panes created so far for this project) can just call switchScreen() anywhere in the code.
   public void switchScreen(AppScreen screen) {
     switch (screen) {
       case START_SCREEN:
