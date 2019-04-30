@@ -4,9 +4,14 @@ import javafx.scene.layout.BorderPane;
 
 public class EndPane extends BorderPane {
 
-  private QuizApplication application;
+	private QuizApplication application;
 
-  public EndPane(QuizApplication application) {
-    this.application = application;
-  }
+	public EndPane(QuizApplication application) {
+		this.application = application;
+		setupLayout();
+	}
+
+	private void setupLayout() {
+
+	}
 }
