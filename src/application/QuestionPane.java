@@ -10,6 +10,7 @@ public class QuestionPane extends BorderPane {
   public QuestionPane(QuizApplication application) {
     this.application = application;
   }
+
   public void setup(Stage primaryStage) {
 	  
   }
