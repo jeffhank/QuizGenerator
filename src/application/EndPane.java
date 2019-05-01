@@ -54,6 +54,5 @@ public class EndPane extends BorderPane {
 		buttonGrid.add(saveAndExitButton, 2, 0);
 		this.setCenter(buttonGrid);
 		buttonGrid.setAlignment(Pos.CENTER);
-
 	}
 }

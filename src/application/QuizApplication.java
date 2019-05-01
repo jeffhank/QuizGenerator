@@ -17,6 +17,7 @@ public class QuizApplication extends Application {
   final int WINDOW_HEIGHT = 600;
   private Stage primaryStage;
   private HashMap<String, List<Question>> questionDb;
+  private List<String> selectedTopics;
   /**
    * @param primaryStage is the java fx Stage that runs the program
    */
@@ -29,25 +30,25 @@ public class QuizApplication extends Application {
     // First, setup our start scene
     screens = new ArrayList<>();
 
-    Pane startPane = new StartPane(this);
+    StartPane startPane = new StartPane(this);
     Scene startScene = new Scene(startPane, WINDOW_WIDTH, WINDOW_HEIGHT);
     // CSS styling
     startScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(startPane, startScene));
 
-    Pane questionPane = new QuestionPane(this);
+    QuestionPane questionPane = new QuestionPane(this);
     Scene questionScene = new Scene(questionPane, WINDOW_WIDTH, WINDOW_HEIGHT);
     // CSS Styling
     questionScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(questionPane, questionScene));
 
-    Pane endPane = new EndPane(this);
+    EndPane endPane = new EndPane(this);
     Scene endScene = new Scene(endPane, WINDOW_WIDTH, WINDOW_HEIGHT);
     // CSS Styling
     endScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(endPane, endScene));
-    
-    Pane savePane = new SavePane(this);
+
+    SavePane savePane = new SavePane(this);
     Scene saveScene = new Scene(savePane, WINDOW_WIDTH, WINDOW_HEIGHT);
     // CSS Styling
     saveScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
@@ -60,20 +61,17 @@ public class QuizApplication extends Application {
   // advantage that every Pane object which also contains a reference to this class (such as all
   // the panes created so far for this project) can just call switchScreen() anywhere in the code.
   public void switchScreen(AppScreen screen) {
+    int screenIndex = -1;
     switch (screen) {
-      case START_SCREEN:
-        primaryStage.setScene(screens.get(0).getValue());
-        break;
-      case QUESTION_SCREEN:
-        primaryStage.setScene(screens.get(1).getValue());
-        break;
-      case END_SCREEN:
-        primaryStage.setScene(screens.get(2).getValue());
-        break;
-      case SAVE_SCREEN:
-          primaryStage.setScene(screens.get(3).getValue());
-          break;
+      case START_SCREEN: screenIndex = 0; break;
+      case QUESTION_SCREEN: screenIndex = 1; break;
+      case END_SCREEN: screenIndex = 2; break;
+      case SAVE_SCREEN: screenIndex = 3; break;
     }
+    Pair<Pane, Scene> sceneToShow = screens.get(screenIndex);
+    primaryStage.setScene(sceneToShow.getValue());
+    ((QScene) sceneToShow.getKey()).onShown();
+
     primaryStage.show();
   }
 
@@ -87,6 +85,10 @@ public class QuizApplication extends Application {
 
   public void setQuestionDb(HashMap<String, List<Question>> questionDb) {
     this.questionDb = questionDb;
+  }
+
+  public List<String> getSelectedTopics() {
+    return selectedTopics;
   }
 
   public static void main(String[] args) {

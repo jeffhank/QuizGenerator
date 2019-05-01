@@ -1,16 +1,12 @@
 package application;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
@@ -18,15 +14,18 @@ import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class StartPane extends BorderPane {
+public class StartPane extends BorderPane implements QScene {
 
   private QuizApplication application;
+  private List<String> chosenTopics;
 
   public StartPane(QuizApplication application) {
     this.application = application;
+    this.chosenTopics = new ArrayList<>();
     setupLayout();
   }
 
@@ -46,10 +45,6 @@ public class StartPane extends BorderPane {
     Label topicTitle = new Label("Select Topics");
     topicTitle.setStyle("-fx-font: 18 arial;");
     topicGrid.add(topicTitle, 0, 0);
-    for (int i = 1; i < 4; i++) {
-      CheckBox tBox = new CheckBox("Topic " + i);
-      topicGrid.add(tBox, 0, i);
-    }
     topicGrid.setVgap(10.0);
     this.setLeft(topicGrid);
     topicGrid.setAlignment(Pos.CENTER_LEFT);
@@ -69,7 +64,16 @@ public class StartPane extends BorderPane {
         fileSelectedLabel.setText(chosenFile.getName());
         try {
           JsonLoader loader = new JsonLoader(chosenFile.getPath());
-          application.setQuestionDb(loader.getParsedDb());
+          HashMap<String, List<Question>> parsedDb = loader.getParsedDb();
+          application.setQuestionDb(parsedDb);
+
+          // Update the topic list
+          String[] topicSet = parsedDb.keySet().toArray(new String[parsedDb.size()]);
+          for (int i = 0; i < topicSet.length; i++) {
+            CheckBox tBox = new CheckBox(topicSet[i]);
+            topicGrid.add(tBox, 0, i + 1);
+            chosenTopics.add(topicSet[i]);
+          }
 
           topicGrid.setVisible(true);
           numQuestionsPane.setVisible(true);
@@ -114,5 +118,14 @@ public class StartPane extends BorderPane {
     numQuestionsPane.setAlignment(Pos.CENTER_RIGHT);
 
     this.setStyle("-fx-background-color: #FFFFFF;");
+  }
+
+  public List<String> getChosenTopics() {
+    return chosenTopics;
+  }
+
+  @Override
+  public void onShown() {
+    // Do nothing
   }
 }

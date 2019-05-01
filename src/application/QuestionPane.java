@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class QuestionPane extends BorderPane {
+public class QuestionPane extends BorderPane implements QScene {
 
   private QuizApplication application;
   private GridPane imageGrid;
@@ -68,6 +68,7 @@ public class QuestionPane extends BorderPane {
   }
 
   private void updateQuestionView(int questionIndex) {
+    System.out.println(questionIndex);
     List<Question> questions = application.getQuestionDb().values().stream()
             .flatMap(List::stream).collect(Collectors.toList());
 
@@ -80,7 +81,7 @@ public class QuestionPane extends BorderPane {
     this.setAlignment(imageGrid, Pos.TOP_CENTER);
     System.out.println(newQuestion.getImage());
     if(newQuestion.getImage().equals("none")) {
-
+      imageGrid.getChildren().clear();
       Image image = new Image("resources/no_image.png", 200, 200, false, false);
       myImageView = new ImageView();
       myImageView.setImage(image);
@@ -89,6 +90,7 @@ public class QuestionPane extends BorderPane {
       System.out.println("added");
     }
     else {
+      imageGrid.getChildren().clear();
       Image image = new Image("resources/" + newQuestion.getImage(), 200, 200, false, false);
       myImageView = new ImageView();
       myImageView.setImage(image);
@@ -109,5 +111,11 @@ public class QuestionPane extends BorderPane {
 
   private void setupEventHandlers() {
 
+  }
+
+  @Override
+  public void onShown() {
+    updateQuestionView(currentQuestionIndex);
+    
   }
 }
