@@ -11,8 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.util.Pair;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,12 +72,22 @@ public class QuestionPane extends BorderPane implements QScene {
   }
 
   private void updateQuestionView(int questionIndex) {
-    
-    
     nextButton.setDisable(true);
     questionGrid.getChildren().removeIf(child -> child instanceof ImageView);
-    List<Question> questions = application.getQuestionDb().values().stream()
+    System.out.println(questionIndex);
+
+    HashMap<String, List<Question>> questionDb = application.getQuestionDb();
+    HashMap<String, List<Question>> filteredQuestionDb = new HashMap<>();
+    List<String> topicsWanted = application.getSelectedTopics();
+
+    for (String topic : topicsWanted) {
+      filteredQuestionDb.put(topic, questionDb.get(topic));
+    }
+
+    List<Question> questions = filteredQuestionDb.values().stream()
             .flatMap(List::stream).collect(Collectors.toList());
+    System.out.println(questions);
+
     if(questionIndex > questions.size() - 1) {
       System.out.println(correctAnswers);
       application.setCorrectAnswers(correctAnswers);
@@ -128,6 +140,7 @@ public class QuestionPane extends BorderPane implements QScene {
           questionGrid.add(incorrectOrCorrect, 1, row);
         }
         else {
+          System.out.println("false");
           Image incorrect = new Image("resources/incorrect.png", 20, 20, false, false);
           ImageView incorrectOrCorrect = new ImageView();
           incorrectOrCorrect.setImage(incorrect);
@@ -151,6 +164,5 @@ public class QuestionPane extends BorderPane implements QScene {
   @Override
   public void onShown() {
     updateQuestionView(currentQuestionIndex);
-    
   }
 }
