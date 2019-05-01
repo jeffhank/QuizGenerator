@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.io.File;
@@ -92,7 +93,11 @@ public class QuestionPane extends BorderPane implements QScene {
       System.out.println(correctAnswers);
       application.setCorrectAnswers(correctAnswers);
       application.setTotalQuestions(questions.size());
+      currentQuestionIndex = 0;
+      correctAnswers = 0;
       application.switchScreen(AppScreen.END_SCREEN);
+      
+      
       return;
     }
     questionGrid.getChildren().removeIf(childComponent -> childComponent instanceof RadioButton);
@@ -157,6 +162,7 @@ public class QuestionPane extends BorderPane implements QScene {
     }
   }
 
+  
   private void setupEventHandlers() {
 
   }
