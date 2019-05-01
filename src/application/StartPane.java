@@ -18,7 +18,6 @@ public class StartPane extends BorderPane {
   public StartPane(QuizApplication application) {
     this.application = application;
     setupLayout();
-
   }
 
   private void setupLayout() {
@@ -48,7 +47,6 @@ public class StartPane extends BorderPane {
     	application.switchScreen(AppScreen.END_SCREEN);
     });
 
-    generateButton.setOnAction(a -> application.switchScreen(AppScreen.END_SCREEN));
     generateButton.setId("gb");
     buttonGrid.add(addQuestionsButton, 0, 0);
     buttonGrid.add(generateButton, 0, 1);
