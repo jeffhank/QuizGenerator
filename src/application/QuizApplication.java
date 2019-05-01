@@ -19,15 +19,14 @@ public class QuizApplication extends Application {
 	private Stage primaryStage;
 	private HashMap<String, List<Question>> questionDb;
 	private List<String> selectedTopics;
-	private int totalQuestions = 5;
-	private int questionsCorrect;
+	private int totalQuestions;
 
 	/**
 	 * @param primaryStage is the java fx Stage that runs the program
 	 */
 	@Override
 	public void start(Stage primaryStage) {
-		this.correctAnswers = 0;
+		
 		// Store this stage value, so we can use it to switch screens later on
 		this.primaryStage = primaryStage;
 
@@ -119,9 +118,12 @@ public class QuizApplication extends Application {
 	public int getTotalQuestions() {
 		return totalQuestions;
 	}
+	public void setTotalQuestions(int totalQuestions) {
+	  this.totalQuestions = totalQuestions;
+	}
 
 	public int getQuestionsCorrect() {
-		return questionsCorrect;
+		return correctAnswers;
 	}
 
 	public static void main(String[] args) {

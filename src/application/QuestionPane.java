@@ -74,12 +74,14 @@ public class QuestionPane extends BorderPane implements QScene {
     
     nextButton.setDisable(true);
     questionGrid.getChildren().removeIf(child -> child instanceof ImageView);
-    System.out.println(questionIndex);
     List<Question> questions = application.getQuestionDb().values().stream()
             .flatMap(List::stream).collect(Collectors.toList());
     if(questionIndex > questions.size() - 1) {
+      System.out.println(correctAnswers);
       application.setCorrectAnswers(correctAnswers);
+      application.setTotalQuestions(questions.size());
       application.switchScreen(AppScreen.END_SCREEN);
+      return;
     }
     questionGrid.getChildren().removeIf(childComponent -> childComponent instanceof RadioButton);
     Question newQuestion = questions.get(questionIndex);
@@ -96,7 +98,6 @@ public class QuestionPane extends BorderPane implements QScene {
       myImageView.setImage(image);
       myImageView.setPreserveRatio(true);
       imageGrid.add(myImageView, 0, 0);
-      System.out.println("added");
     }
     else {
       imageGrid.getChildren().clear();
@@ -105,7 +106,6 @@ public class QuestionPane extends BorderPane implements QScene {
       myImageView.setImage(image);
       myImageView.setPreserveRatio(true);
       imageGrid.add(myImageView, 0, 0);
-      System.out.println("added");
     }
     this.questionLabel.setText(newQuestion.getQuestionText());
 
@@ -120,15 +120,14 @@ public class QuestionPane extends BorderPane implements QScene {
       answerButton.setOnAction(a -> {
         questionGrid.getChildren().removeIf(child -> child instanceof ImageView);
         if(answer.getIsCorrect() == true) {
+          correctAnswers++;
           Image correct = new Image("resources/correct.jpg", 30, 30, false, false);
           ImageView incorrectOrCorrect = new ImageView();
           incorrectOrCorrect.setImage(correct);
           myImageView.setPreserveRatio(true);
           questionGrid.add(incorrectOrCorrect, 1, row);
-          correctAnswers++;
         }
         else {
-          System.out.println("false");
           Image incorrect = new Image("resources/incorrect.png", 20, 20, false, false);
           ImageView incorrectOrCorrect = new ImageView();
           incorrectOrCorrect.setImage(incorrect);
