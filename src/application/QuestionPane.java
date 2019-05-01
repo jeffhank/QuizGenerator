@@ -2,7 +2,6 @@ package application;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -15,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class QuestionPane extends BorderPane implements QScene {
+public class QuestionPane extends BorderPane {
 
   private QuizApplication application;
 
@@ -101,12 +100,5 @@ public class QuestionPane extends BorderPane implements QScene {
 
   private void setupEventHandlers() {
 
-  }
-
-  @Override
-  public void onShown() {
-    Alert a = new Alert(Alert.AlertType.ERROR);
-    a.setContentText("test");
-    a.show();
   }
 }
