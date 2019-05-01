@@ -32,14 +32,17 @@ public class QuizApplication extends Application {
 
     Pane questionPane = new QuestionPane(this);
     Scene questionScene = new Scene(questionPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    questionScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(questionPane, questionScene));
 
     Pane endPane = new EndPane(this);
     Scene endScene = new Scene(endPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    endScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(endPane, endScene));
     
     Pane savePane = new SavePane(this);
     Scene saveScene = new Scene(savePane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    saveScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(savePane, saveScene));
 
     switchScreen(AppScreen.START_SCREEN);
