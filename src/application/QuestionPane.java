@@ -2,6 +2,7 @@ package application;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -24,13 +25,16 @@ public class QuestionPane extends BorderPane implements QScene {
   private GridPane questionGrid;
   private ImageView myImageView;
   private ToggleGroup answerGroup;
-
+  private Button nextButton;
   private int currentQuestionIndex;
+  private int correctAnswers;
 
   public QuestionPane(QuizApplication application) {
     this.application = application;
     this.currentQuestionIndex = 0;
     this.imageGrid = new GridPane();
+    this.nextButton = new Button();
+    this.correctAnswers = 0;
     setupComponents();
     setupEventHandlers();
   }
@@ -56,24 +60,27 @@ public class QuestionPane extends BorderPane implements QScene {
     questionGrid.setVgap(30.0);
     this.setCenter(questionGrid);
     questionGrid.setAlignment(Pos.TOP_LEFT);
-    Button nextButton = new Button("Next");
+    nextButton = new Button("Next");
 
-    Button backButton = new Button("Back");
     nextButton.setOnAction(v -> updateQuestionView(++currentQuestionIndex));
-    backButton.setOnAction(v -> updateQuestionView(--currentQuestionIndex));
+    nextButton.setDisable(true);
 
     this.setRight(nextButton);
-    this.setLeft(backButton);
-    BorderPane.setAlignment(backButton, Pos.BOTTOM_LEFT);
     BorderPane.setAlignment(nextButton, Pos.BOTTOM_RIGHT);
   }
 
   private void updateQuestionView(int questionIndex) {
+    
+    
+    nextButton.setDisable(true);
     questionGrid.getChildren().removeIf(child -> child instanceof ImageView);
     System.out.println(questionIndex);
     List<Question> questions = application.getQuestionDb().values().stream()
             .flatMap(List::stream).collect(Collectors.toList());
-
+    if(questionIndex > questions.size() - 1) {
+      application.setCorrectAnswers(correctAnswers);
+      application.switchScreen(AppScreen.END_SCREEN);
+    }
     questionGrid.getChildren().removeIf(childComponent -> childComponent instanceof RadioButton);
     Question newQuestion = questions.get(questionIndex);
     this.titleLabel.setText(String.format("Question %d out of %d", questionIndex + 1,
@@ -118,6 +125,7 @@ public class QuestionPane extends BorderPane implements QScene {
           incorrectOrCorrect.setImage(correct);
           myImageView.setPreserveRatio(true);
           questionGrid.add(incorrectOrCorrect, 1, row);
+          correctAnswers++;
         }
         else {
           System.out.println("false");
@@ -127,6 +135,12 @@ public class QuestionPane extends BorderPane implements QScene {
           myImageView.setPreserveRatio(true);
           questionGrid.add(incorrectOrCorrect, 1, row);
         }
+        
+        answerGroup.getToggles().forEach(toggle -> {
+          Node node = (Node) toggle ;
+          node.setDisable(true);
+          nextButton.setDisable(false);
+      });
       });
     }
   }

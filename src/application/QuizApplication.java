@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class QuizApplication extends Application {
-
+  
+  private int correctAnswers;
   private List<Pair<Pane, Scene>> screens;
   final int WINDOW_WIDTH = 800;
   final int WINDOW_HEIGHT = 600;
@@ -23,6 +24,7 @@ public class QuizApplication extends Application {
    */
   @Override
   public void start(Stage primaryStage) {
+    this.correctAnswers = 0;
     // Store this stage value, so we can use it to switch screens later on
     this.primaryStage = primaryStage;
 
@@ -93,5 +95,9 @@ public class QuizApplication extends Application {
 
   public static void main(String[] args) {
     launch(args);
+  }
+  
+  public void setCorrectAnswers(int correct) {
+    this.correctAnswers = correct;
   }
 }
