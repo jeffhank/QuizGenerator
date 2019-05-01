@@ -22,11 +22,11 @@ import java.util.List;
 public class StartPane extends BorderPane implements QScene {
 
   private QuizApplication application;
-  private List<String> chosenTopics;
+  private List<CheckBox> topicBoxes;
 
   public StartPane(QuizApplication application) {
     this.application = application;
-    this.chosenTopics = new ArrayList<>();
+    this.topicBoxes = new ArrayList<>();
     setupLayout();
   }
 
@@ -78,15 +78,9 @@ public class StartPane extends BorderPane implements QScene {
           Arrays.sort(topicSet);
           for (int i = 0; i < topicSet.length; i++) {
             CheckBox tBox = new CheckBox(topicSet[i]);
-            tBox.selectedProperty().addListener((o, oldVal, newVal) -> {
-              if (newVal) {
-                chosenTopics.add(tBox.getText());
-              } else {
-                chosenTopics.remove(tBox.getText());
-              }
-            });
+            tBox.setSelected(true);
             topicGrid.add(tBox, 0, i + 1);
-            chosenTopics.add(topicSet[i]);
+            topicBoxes.add(tBox);
           }
 
           topicGrid.setVisible(true);
@@ -110,6 +104,8 @@ public class StartPane extends BorderPane implements QScene {
     generateButton.setVisible(false);
     addNewQuestionButton.setVisible(false);
     generateButton.setOnAction(event -> {
+      // Get the topics chosen by the user
+      application.setSelectedTopics(setTopics());
       application.switchScreen(AppScreen.QUESTION_SCREEN);
     });
 
@@ -139,8 +135,13 @@ public class StartPane extends BorderPane implements QScene {
     this.setStyle("-fx-background-color: #FFFFFF;");
   }
 
-  public List<String> getChosenTopics() {
-    return chosenTopics;
+  public List<String> setTopics() {
+    List<String> ret = new ArrayList<>();
+    for (CheckBox topicBox : topicBoxes) {
+      if (topicBox.isSelected())
+        ret.add(topicBox.getText());
+    }
+    return ret;
   }
 
   @Override

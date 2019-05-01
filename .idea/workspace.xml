@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2078b8b4-e75c-40c7-b373-1920100001e4" name="Default" comment="Added checkbox updating">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application/QuestionPane.java" afterPath="$PROJECT_DIR$/src/application/QuestionPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application/QuizApplication.java" afterPath="$PROJECT_DIR$/src/application/QuizApplication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application/StartPane.java" afterPath="$PROJECT_DIR$/src/application/StartPane.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,12 +28,10 @@
       <file leaf-file-name="StartPane.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/application/StartPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="91" column="34" lean-forward="true" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+            <state relative-caret-position="178">
+              <caret line="104" column="43" lean-forward="true" selection-start-line="104" selection-start-column="43" selection-end-line="104" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4797#4798#0" expanded="true" />
-                <element signature="e#4826#4827#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,8 +40,8 @@
       <file leaf-file-name="JsonLoader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/JsonLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="66" column="7" lean-forward="true" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
+            <state relative-caret-position="336">
+              <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3030#3031#0" expanded="true" />
@@ -53,18 +54,26 @@
       <file leaf-file-name="QuizApplication.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/QuizApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+            <state relative-caret-position="441">
+              <caret line="133" column="0" lean-forward="true" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3021#3022#0" expanded="true" />
-                <element signature="e#3052#3053#0" expanded="true" />
-                <marker date="1556744382506" expanded="false" signature="2746:2753" ph=" { " />
-                <marker date="1556744382506" expanded="false" signature="2773:2777" ph=" }" />
-                <marker date="1556744382506" expanded="false" signature="2835:2842" ph=" { " />
-                <marker date="1556744382506" expanded="false" signature="2860:2864" ph=" }" />
-                <marker date="1556744382506" expanded="false" signature="3095:3102" ph=" { " />
-                <marker date="1556744382506" expanded="false" signature="3115:3119" ph=" }" />
+                <element signature="e#3452#3453#0" expanded="true" />
+                <element signature="e#3481#3482#0" expanded="true" />
+                <element signature="e#3541#3542#0" expanded="true" />
+                <element signature="e#3568#3569#0" expanded="true" />
+                <element signature="e#3726#3727#0" expanded="true" />
+                <element signature="e#3757#3758#0" expanded="true" />
+                <element signature="e#3793#3794#0" expanded="true" />
+                <element signature="e#3824#3825#0" expanded="true" />
+                <element signature="e#3879#3880#0" expanded="true" />
+                <element signature="e#3925#3926#0" expanded="true" />
+                <element signature="e#3963#3964#0" expanded="true" />
+                <element signature="e#3994#3995#0" expanded="true" />
+                <element signature="e#4038#4039#0" expanded="true" />
+                <element signature="e#4060#4061#0" expanded="true" />
+                <element signature="e#4108#4109#0" expanded="true" />
+                <element signature="e#4147#4148#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,9 +83,10 @@
         <entry file="file://$PROJECT_DIR$/src/application/EndPane.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="840">
-              <caret line="56" column="5" lean-forward="false" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
+              <caret line="64" column="3" lean-forward="false" selection-start-line="64" selection-start-column="3" selection-end-line="64" selection-end-column="3" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1556750543824" expanded="true" signature="2237:2238" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -92,12 +102,38 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="QuestionPane.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/application/QuestionPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="80" column="64" lean-forward="true" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="64" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#5811#5812#0" expanded="true" />
+                <element signature="e#5861#5862#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="questions_003.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/resources/questions_003.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="474">
+              <caret line="32" column="32" lean-forward="true" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Question.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/Question.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-              <folding />
+            <state relative-caret-position="396">
+              <caret line="30" column="3" lean-forward="true" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+              <folding>
+                <marker date="1556747732598" expanded="true" signature="1919:1939" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -146,9 +182,9 @@
         <option value="$PROJECT_DIR$/src/application/ScreenShownCallback.java" />
         <option value="$PROJECT_DIR$/src/application/EndPane.java" />
         <option value="$PROJECT_DIR$/src/application/SavePane.java" />
-        <option value="$PROJECT_DIR$/src/application/QuizApplication.java" />
-        <option value="$PROJECT_DIR$/src/application/QuestionPane.java" />
         <option value="$PROJECT_DIR$/src/application/QScene.java" />
+        <option value="$PROJECT_DIR$/src/application/QuestionPane.java" />
+        <option value="$PROJECT_DIR$/src/application/QuizApplication.java" />
         <option value="$PROJECT_DIR$/src/application/StartPane.java" />
       </list>
     </option>
@@ -376,8 +412,9 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/application/JsonSaver.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/application/EndPane.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/application/QuestionPane.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/application/QuizApplication.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -385,15 +422,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/application/JsonLoader.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/resources/IMG_1793.PNG</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/resources/arbitrary_graph.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/resources/btree.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/resources/grading-rubric-tentative.pdf</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/resources/questions_001.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/resources/questions_002.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/resources/questions_003.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/resources/set_subset_superset.png</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -401,15 +429,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/arbitrary_graph.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/btree.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/grading-rubric-tentative.pdf</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/questions_001.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/questions_002.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/questions_003.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/set_subset_superset.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/IMG_1793.PNG</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/application/JSONLoader.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -649,7 +668,7 @@
       <updated>1556653413549</updated>
       <workItem from="1556653418896" duration="4783000" />
       <workItem from="1556661944816" duration="15444000" />
-      <workItem from="1556739692197" duration="7171000" />
+      <workItem from="1556739692197" duration="9993000" />
     </task>
     <task id="LOCAL-00001" summary="modularized everything, did some cleanup, and started on backend">
       <created>1556655732502</created>
@@ -732,7 +751,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27398000" />
+    <option name="totallyTimeSpent" value="30220000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -798,8 +817,6 @@
           <caret line="70" column="67" lean-forward="true" selection-start-line="70" selection-start-column="67" selection-end-line="70" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4797#4798#0" expanded="true" />
-            <element signature="e#4826#4827#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -822,14 +839,22 @@
           <caret line="66" column="23" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3021#3022#0" expanded="true" />
-            <element signature="e#3052#3053#0" expanded="true" />
-            <marker date="1556744382506" expanded="false" signature="2746:2753" ph=" { " />
-            <marker date="1556744382506" expanded="false" signature="2773:2777" ph=" }" />
-            <marker date="1556744382506" expanded="false" signature="2835:2842" ph=" { " />
-            <marker date="1556744382506" expanded="false" signature="2860:2864" ph=" }" />
-            <marker date="1556744382506" expanded="false" signature="3095:3102" ph=" { " />
-            <marker date="1556744382506" expanded="false" signature="3115:3119" ph=" }" />
+            <element signature="e#3452#3453#0" expanded="true" />
+            <element signature="e#3481#3482#0" expanded="true" />
+            <element signature="e#3541#3542#0" expanded="true" />
+            <element signature="e#3568#3569#0" expanded="true" />
+            <element signature="e#3726#3727#0" expanded="true" />
+            <element signature="e#3757#3758#0" expanded="true" />
+            <element signature="e#3793#3794#0" expanded="true" />
+            <element signature="e#3824#3825#0" expanded="true" />
+            <element signature="e#3879#3880#0" expanded="true" />
+            <element signature="e#3925#3926#0" expanded="true" />
+            <element signature="e#3963#3964#0" expanded="true" />
+            <element signature="e#3994#3995#0" expanded="true" />
+            <element signature="e#4038#4039#0" expanded="true" />
+            <element signature="e#4060#4061#0" expanded="true" />
+            <element signature="e#4108#4109#0" expanded="true" />
+            <element signature="e#4147#4148#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -854,7 +879,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1556747732598" expanded="true" signature="1919:1939" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -880,6 +907,8 @@
           <caret line="71" column="74" lean-forward="true" selection-start-line="71" selection-start-column="74" selection-end-line="71" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#5811#5812#0" expanded="true" />
+            <element signature="e#5861#5862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -890,8 +919,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4797#4798#0" expanded="true" />
-            <element signature="e#4826#4827#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -902,14 +929,22 @@
           <caret line="43" column="32" lean-forward="false" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3021#3022#0" expanded="true" />
-            <element signature="e#3052#3053#0" expanded="true" />
-            <marker date="1556744382506" expanded="false" signature="2746:2753" ph=" { " />
-            <marker date="1556744382506" expanded="false" signature="2773:2777" ph=" }" />
-            <marker date="1556744382506" expanded="false" signature="2835:2842" ph=" { " />
-            <marker date="1556744382506" expanded="false" signature="2860:2864" ph=" }" />
-            <marker date="1556744382506" expanded="false" signature="3095:3102" ph=" { " />
-            <marker date="1556744382506" expanded="false" signature="3115:3119" ph=" }" />
+            <element signature="e#3452#3453#0" expanded="true" />
+            <element signature="e#3481#3482#0" expanded="true" />
+            <element signature="e#3541#3542#0" expanded="true" />
+            <element signature="e#3568#3569#0" expanded="true" />
+            <element signature="e#3726#3727#0" expanded="true" />
+            <element signature="e#3757#3758#0" expanded="true" />
+            <element signature="e#3793#3794#0" expanded="true" />
+            <element signature="e#3824#3825#0" expanded="true" />
+            <element signature="e#3879#3880#0" expanded="true" />
+            <element signature="e#3925#3926#0" expanded="true" />
+            <element signature="e#3963#3964#0" expanded="true" />
+            <element signature="e#3994#3995#0" expanded="true" />
+            <element signature="e#4038#4039#0" expanded="true" />
+            <element signature="e#4060#4061#0" expanded="true" />
+            <element signature="e#4108#4109#0" expanded="true" />
+            <element signature="e#4147#4148#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -920,6 +955,8 @@
           <caret line="14" column="6" lean-forward="true" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#5811#5812#0" expanded="true" />
+            <element signature="e#5861#5862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -961,6 +998,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,43 +1078,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/EndPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="56" column="5" lean-forward="false" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/application/JsonLoader.java~Stashed changes">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-146">
           <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/JsonLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="66" column="7" lean-forward="true" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3030#3031#0" expanded="true" />
-            <element signature="e#3055#3056#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/application/QuestionPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="45" lean-forward="false" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1106,38 +1112,89 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/Question.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+        <state relative-caret-position="396">
+          <caret line="30" column="3" lean-forward="true" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+          <folding>
+            <marker date="1556747732598" expanded="true" signature="1919:1939" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/EndPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="64" column="3" lean-forward="false" selection-start-line="64" selection-start-column="3" selection-end-line="64" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1556750543824" expanded="true" signature="2237:2238" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/questions_003.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="32" column="32" lean-forward="true" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/QuestionPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="80" column="64" lean-forward="true" selection-start-line="80" selection-start-column="25" selection-end-line="80" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5811#5812#0" expanded="true" />
+            <element signature="e#5861#5862#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/QuizApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+        <state relative-caret-position="441">
+          <caret line="133" column="0" lean-forward="true" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3021#3022#0" expanded="true" />
-            <element signature="e#3052#3053#0" expanded="true" />
-            <marker date="1556744382506" expanded="false" signature="2746:2753" ph=" { " />
-            <marker date="1556744382506" expanded="false" signature="2773:2777" ph=" }" />
-            <marker date="1556744382506" expanded="false" signature="2835:2842" ph=" { " />
-            <marker date="1556744382506" expanded="false" signature="2860:2864" ph=" }" />
-            <marker date="1556744382506" expanded="false" signature="3095:3102" ph=" { " />
-            <marker date="1556744382506" expanded="false" signature="3115:3119" ph=" }" />
+            <element signature="e#3452#3453#0" expanded="true" />
+            <element signature="e#3481#3482#0" expanded="true" />
+            <element signature="e#3541#3542#0" expanded="true" />
+            <element signature="e#3568#3569#0" expanded="true" />
+            <element signature="e#3726#3727#0" expanded="true" />
+            <element signature="e#3757#3758#0" expanded="true" />
+            <element signature="e#3793#3794#0" expanded="true" />
+            <element signature="e#3824#3825#0" expanded="true" />
+            <element signature="e#3879#3880#0" expanded="true" />
+            <element signature="e#3925#3926#0" expanded="true" />
+            <element signature="e#3963#3964#0" expanded="true" />
+            <element signature="e#3994#3995#0" expanded="true" />
+            <element signature="e#4038#4039#0" expanded="true" />
+            <element signature="e#4060#4061#0" expanded="true" />
+            <element signature="e#4108#4109#0" expanded="true" />
+            <element signature="e#4147#4148#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/application/JsonLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3030#3031#0" expanded="true" />
+            <element signature="e#3055#3056#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/application/StartPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="91" column="34" lean-forward="true" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+        <state relative-caret-position="178">
+          <caret line="104" column="43" lean-forward="true" selection-start-line="104" selection-start-column="43" selection-end-line="104" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4797#4798#0" expanded="true" />
-            <element signature="e#4826#4827#0" expanded="true" />
           </folding>
         </state>
       </provider>

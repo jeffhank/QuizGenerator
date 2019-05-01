@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-public class EndPane extends BorderPane {
+public class EndPane extends BorderPane implements QScene {
 
 	private QuizApplication application;
 
@@ -22,15 +22,6 @@ public class EndPane extends BorderPane {
 	}
 
 	private void setupLayout() {
-
-		Label titleLabel = new Label(
-				"Final Score: " + application.getQuestionsCorrect() + "/" + application.getTotalQuestions() + "("
-						+ (double) (application.getQuestionsCorrect() / application.getTotalQuestions()) * 100 + "%)");
-
-		titleLabel.setPadding(new Insets(12));
-		titleLabel.setStyle("-fx-font: 30 arial;");
-		this.setTop(titleLabel);
-		BorderPane.setAlignment(titleLabel, Pos.CENTER);
 
 		GridPane buttonGrid = new GridPane();
 		Button restartQuizButton = new Button("Restart quiz");
@@ -59,4 +50,17 @@ public class EndPane extends BorderPane {
 		this.setCenter(buttonGrid);
 		buttonGrid.setAlignment(Pos.CENTER);
 	}
+
+  @Override
+  public void onShown() {
+    Label titleLabel = new Label(
+        "Final Score: " + application.getQuestionsCorrect() + "/" + application.getTotalQuestions() + " ("
+            +  ((double)application.getQuestionsCorrect() / application.getTotalQuestions()) * 100 + "%)");
+
+    titleLabel.setPadding(new Insets(12));
+    titleLabel.setStyle("-fx-font: 30 arial;");
+    this.setTop(titleLabel);
+    BorderPane.setAlignment(titleLabel, Pos.CENTER);
+    
+  }
 }
