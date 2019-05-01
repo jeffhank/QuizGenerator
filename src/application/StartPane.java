@@ -15,6 +15,7 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -69,8 +70,18 @@ public class StartPane extends BorderPane implements QScene {
 
           // Update the topic list
           String[] topicSet = parsedDb.keySet().toArray(new String[parsedDb.size()]);
+
+          // Sort the topic list alphabetically
+          Arrays.sort(topicSet);
           for (int i = 0; i < topicSet.length; i++) {
             CheckBox tBox = new CheckBox(topicSet[i]);
+            tBox.selectedProperty().addListener((o, oldVal, newVal) -> {
+              if (newVal) {
+                chosenTopics.add(tBox.getText());
+              } else {
+                chosenTopics.remove(tBox.getText());
+              }
+            });
             topicGrid.add(tBox, 0, i + 1);
             chosenTopics.add(topicSet[i]);
           }
