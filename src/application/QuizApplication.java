@@ -17,7 +17,9 @@ public class QuizApplication extends Application {
   final int WINDOW_HEIGHT = 600;
   private Stage primaryStage;
   private HashMap<String, List<Question>> questionDb;
-
+  /**
+   * @param primaryStage is the java fx Stage that runs the program
+   */
   @Override
   public void start(Stage primaryStage) {
     // Store this stage value, so we can use it to switch screens later on
@@ -29,21 +31,25 @@ public class QuizApplication extends Application {
 
     Pane startPane = new StartPane(this);
     Scene startScene = new Scene(startPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    // CSS styling
     startScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(startPane, startScene));
 
     Pane questionPane = new QuestionPane(this);
     Scene questionScene = new Scene(questionPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    // CSS Styling
     questionScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(questionPane, questionScene));
 
     Pane endPane = new EndPane(this);
     Scene endScene = new Scene(endPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    // CSS Styling
     endScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(endPane, endScene));
     
     Pane savePane = new SavePane(this);
     Scene saveScene = new Scene(savePane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    // CSS Styling
     saveScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(savePane, saveScene));
 
