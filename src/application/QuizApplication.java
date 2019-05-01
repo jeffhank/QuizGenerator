@@ -7,14 +7,16 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class QuizApplication extends Application {
 
-  List<Pair<Pane, Scene>> screens;
+  private List<Pair<Pane, Scene>> screens;
   final int WINDOW_WIDTH = 800;
   final int WINDOW_HEIGHT = 600;
   private Stage primaryStage;
+  private HashMap<String, List<Question>> questionDb;
 
   @Override
   public void start(Stage primaryStage) {
@@ -67,6 +69,18 @@ public class QuizApplication extends Application {
           break;
     }
     primaryStage.show();
+  }
+
+  public Stage getPrimaryStage() {
+    return primaryStage;
+  }
+
+  public HashMap<String, List<Question>> getQuestionDb() {
+    return questionDb;
+  }
+
+  public void setQuestionDb(HashMap<String, List<Question>> questionDb) {
+    this.questionDb = questionDb;
   }
 
   public static void main(String[] args) {

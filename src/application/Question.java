@@ -37,4 +37,13 @@ public class Question {
     return choiceArray;
   }
 
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    for (Answer a : choiceArray)
+      builder.append(a.toString());
+    String answerChoices = builder.toString();
+    return String.format("[%s, %s, %s, %s, {%s}]", metaData, questionText, topic, image,
+            answerChoices);
+  }
 }

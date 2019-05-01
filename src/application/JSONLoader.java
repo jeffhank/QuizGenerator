@@ -9,21 +9,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
-public class JSONLoader {
-  
-  public JSONLoader(String jsonFilePath) {
-    try {
-      System.out.println(parseFile(jsonFilePath));
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
+public class JsonLoader {
+
+  private String jsonFilePath;
+  private HashMap<String, List<Question>> parsedDb;
+
+  public JsonLoader(String jsonFilePath) throws IOException, ParseException {
+    this.jsonFilePath = jsonFilePath;
+    this.parsedDb = parseFile();
   }
 
-  private HashMap<String, List<Question>> parseFile(String jsonFilePath) throws IOException,
-          ParseException {
+  private HashMap<String, List<Question>> parseFile() throws IOException, ParseException {
     // Load our file
     JSONObject fileObj = (JSONObject) new JSONParser().parse(new FileReader(jsonFilePath));
 
@@ -61,8 +59,11 @@ public class JSONLoader {
       List<Question> topicQuestions = questionDb.get(topic);
       topicQuestions.add(parsedQ);
     }
+
     return questionDb;
   }
 
-//  public static void main(String[] args) { new JSONLoader("resources/questions_002.json"); }
+  public HashMap<String, List<Question>> getParsedDb() {
+    return parsedDb;
+  }
 }
