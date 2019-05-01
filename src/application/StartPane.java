@@ -44,6 +44,9 @@ public class StartPane extends BorderPane {
     GridPane buttonGrid = new GridPane();
     Button addQuestionsButton = new Button("Add Questions");
     Button generateButton = new Button("Generate Quiz");
+    generateButton.setOnAction(event -> {
+    	application.switchScreen(AppScreen.END_SCREEN);
+    });
 
     generateButton.setOnAction(a -> application.switchScreen(AppScreen.END_SCREEN));
     generateButton.setId("gb");

@@ -34,11 +34,15 @@ public class QuizApplication extends Application {
     Scene questionScene = new Scene(questionPane, WINDOW_WIDTH, WINDOW_HEIGHT);
     screens.add(new Pair<>(questionPane, questionScene));
 
-    Pane endPane = new QuestionPane(this);
+    Pane endPane = new EndPane(this);
     Scene endScene = new Scene(endPane, WINDOW_WIDTH, WINDOW_HEIGHT);
     screens.add(new Pair<>(endPane, endScene));
+    
+    Pane savePane = new SavePane(this);
+    Scene saveScene = new Scene(savePane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    screens.add(new Pair<>(savePane, saveScene));
 
-    switchScreen(AppScreen.START_SCREEN);
+    switchScreen(AppScreen.END_SCREEN);
   }
 
   // This function uses the primaryStage we stored earlier to switch scenes. This has the
@@ -55,6 +59,9 @@ public class QuizApplication extends Application {
       case END_SCREEN:
         primaryStage.setScene(screens.get(2).getValue());
         break;
+      case SAVE_SCREEN:
+          primaryStage.setScene(screens.get(3).getValue());
+          break;
     }
     primaryStage.show();
   }
