@@ -11,13 +11,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class QuestionPane extends BorderPane {
+public class QuestionPane extends BorderPane implements QScene {
 
   private QuizApplication application;
-
+  private GridPane imageGrid;
   private Label titleLabel;
   private Label questionLabel;
   private GridPane questionGrid;
@@ -29,6 +30,7 @@ public class QuestionPane extends BorderPane {
   public QuestionPane(QuizApplication application) {
     this.application = application;
     this.currentQuestionIndex = 0;
+    this.imageGrid = new GridPane();
     setupComponents();
     setupEventHandlers();
   }
@@ -40,28 +42,19 @@ public class QuestionPane extends BorderPane {
     this.setTop(titleLabel);
     BorderPane.setAlignment(titleLabel, Pos.CENTER);
 
-    GridPane imageGrid = new GridPane();
     this.answerGroup = new ToggleGroup();
 
-    Image image = new Image("resources/IMG_1793.PNG", 200, 200, false, false);
-    myImageView = new ImageView();
-    myImageView.setImage(image);
-    myImageView.setPreserveRatio(true);
-    imageGrid.add(myImageView, 0, 0);
-    imageGrid.setPadding(new Insets(12));
-    this.setLeft(imageGrid);
-    BorderPane.setAlignment(imageGrid, Pos.TOP_CENTER);
+//    HashMap<String, List<Question>> database = application.
 
     questionGrid = new GridPane();
     questionGrid.setPadding(new Insets(12));
-    questionLabel = new Label("Is this project horrible?");
+    questionLabel = new Label();
     questionLabel.setWrapText(true);
     questionLabel.setStyle("-fx-font: 24 arial;");
     questionGrid.add(questionLabel, 0, 0);
     questionGrid.setVgap(20.0);
     this.setCenter(questionGrid);
     questionGrid.setAlignment(Pos.TOP_LEFT);
-
     Button nextButton = new Button("Next");
 
     Button backButton = new Button("Back");
@@ -75,6 +68,7 @@ public class QuestionPane extends BorderPane {
   }
 
   private void updateQuestionView(int questionIndex) {
+    System.out.println(questionIndex);
     List<Question> questions = application.getQuestionDb().values().stream()
             .flatMap(List::stream).collect(Collectors.toList());
 
@@ -82,11 +76,28 @@ public class QuestionPane extends BorderPane {
     Question newQuestion = questions.get(questionIndex);
     this.titleLabel.setText(String.format("Question %d out of %d", questionIndex + 1,
             questions.size()));
-
+    imageGrid.setPadding(new Insets(12));
+    this.setLeft(imageGrid);
+    this.setAlignment(imageGrid, Pos.TOP_CENTER);
     System.out.println(newQuestion.getImage());
-    Image newImage = new Image(newQuestion.getImage(), 200, 200, false,
-            false);
-    this.myImageView.setImage(newImage);
+    if(newQuestion.getImage().equals("none")) {
+      imageGrid.getChildren().clear();
+      Image image = new Image("resources/no_image.png", 200, 200, false, false);
+      myImageView = new ImageView();
+      myImageView.setImage(image);
+      myImageView.setPreserveRatio(true);
+      imageGrid.add(myImageView, 0, 0);
+      System.out.println("added");
+    }
+    else {
+      imageGrid.getChildren().clear();
+      Image image = new Image("resources/" + newQuestion.getImage(), 200, 200, false, false);
+      myImageView = new ImageView();
+      myImageView.setImage(image);
+      myImageView.setPreserveRatio(true);
+      imageGrid.add(myImageView, 0, 0);
+      System.out.println("added");
+    }
     this.questionLabel.setText(newQuestion.getQuestionText());
 
     List<Answer> answers = newQuestion.getChoiceArray();
@@ -100,5 +111,11 @@ public class QuestionPane extends BorderPane {
 
   private void setupEventHandlers() {
 
+  }
+
+  @Override
+  public void onShown() {
+    updateQuestionView(currentQuestionIndex);
+    
   }
 }
