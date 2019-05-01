@@ -31,10 +31,14 @@ public class NewQuestionPane extends BorderPane implements QScene {
 
 		GridPane grid = new GridPane();
 		TextField question = new TextField();
-
+		TextField numAnswerChoices = new TextField();
 		grid.add(new Label("Enter question text: "), 0, 0);
 		grid.add(question, 1, 0);
-
+		grid.add(new Label("How many answer choices do you want?"), 0, 1);
+		grid.add(numAnswerChoices, 1, 1);
+		if (!numAnswerChoices.getText().contentEquals("")) {
+			Integer value1 = Integer.parseInt(numAnswerChoices.getText());
+		}
 		this.setCenter(grid);
 		grid.setAlignment(Pos.CENTER);
 

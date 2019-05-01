@@ -65,7 +65,7 @@ public class QuizApplication extends Application {
 		newQuestionScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
 		screens.add(new Pair<>(newQuestionPane, newQuestionScene));
 
-		switchScreen(AppScreen.START_SCREEN);
+		switchScreen(AppScreen.NEWQUESTION_SCREEN);
 	}
 
 	// This function uses the primaryStage we stored earlier to switch scenes. This
