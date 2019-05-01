@@ -55,7 +55,10 @@ public class StartPane extends BorderPane implements QScene {
     fileSelectedLabel.setStyle("-fx-font: 16 arial;");
 
     Button addQuestionsButton = new Button("Add Questions");
+    Button addNewQuestionButton = new Button("Add A New Question");
+
     Button generateButton = new Button("Generate Quiz");
+    
     addQuestionsButton.setOnAction(event -> {
       FileChooser fileChooser = new FileChooser();
       fileChooser.setTitle("Select Questions");
@@ -89,6 +92,7 @@ public class StartPane extends BorderPane implements QScene {
           topicGrid.setVisible(true);
           numQuestionsPane.setVisible(true);
           generateButton.setVisible(true);
+          addNewQuestionButton.setVisible(true);
         } catch (IOException ex) {
           Alert ioAlert = new Alert(Alert.AlertType.ERROR);
           ioAlert.setTitle("Error Reading Question DB file");
@@ -104,14 +108,18 @@ public class StartPane extends BorderPane implements QScene {
     });
 
     generateButton.setVisible(false);
+    addNewQuestionButton.setVisible(false);
     generateButton.setOnAction(event -> {
       application.switchScreen(AppScreen.QUESTION_SCREEN);
     });
 
     generateButton.setId("gb");
-
+    addNewQuestionButton.setOnAction(event -> {
+        application.switchScreen(AppScreen.NEWQUESTION_SCREEN);
+      });
     buttonGrid.add(addQuestionsButton, 0, 0);
-    buttonGrid.add(fileSelectedLabel, 0, 1);
+    buttonGrid.add(addNewQuestionButton, 0, 1);
+    buttonGrid.add(fileSelectedLabel, 1, 0);
     buttonGrid.add(generateButton, 0, 2);
     buttonGrid.setVgap(10.0);
     this.setCenter(buttonGrid);

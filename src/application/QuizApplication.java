@@ -11,93 +11,124 @@ import java.util.HashMap;
 import java.util.List;
 
 public class QuizApplication extends Application {
-  
-  private int correctAnswers;
-  private List<Pair<Pane, Scene>> screens;
-  final int WINDOW_WIDTH = 800;
-  final int WINDOW_HEIGHT = 600;
-  private Stage primaryStage;
-  private HashMap<String, List<Question>> questionDb;
-  private List<String> selectedTopics;
-  /**
-   * @param primaryStage is the java fx Stage that runs the program
-   */
-  @Override
-  public void start(Stage primaryStage) {
-    this.correctAnswers = 0;
-    // Store this stage value, so we can use it to switch screens later on
-    this.primaryStage = primaryStage;
 
-    // Set up all our different scenes
-    // First, setup our start scene
-    screens = new ArrayList<>();
+	private int correctAnswers;
+	private List<Pair<Pane, Scene>> screens;
+	final int WINDOW_WIDTH = 800;
+	final int WINDOW_HEIGHT = 600;
+	private Stage primaryStage;
+	private HashMap<String, List<Question>> questionDb;
+	private List<String> selectedTopics;
+	private int totalQuestions = 5;
+	private int questionsCorrect;
 
-    StartPane startPane = new StartPane(this);
-    Scene startScene = new Scene(startPane, WINDOW_WIDTH, WINDOW_HEIGHT);
-    // CSS styling
-    startScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
-    screens.add(new Pair<>(startPane, startScene));
+	/**
+	 * @param primaryStage is the java fx Stage that runs the program
+	 */
+	@Override
+	public void start(Stage primaryStage) {
+		this.correctAnswers = 0;
+		// Store this stage value, so we can use it to switch screens later on
+		this.primaryStage = primaryStage;
 
-    QuestionPane questionPane = new QuestionPane(this);
-    Scene questionScene = new Scene(questionPane, WINDOW_WIDTH, WINDOW_HEIGHT);
-    // CSS Styling
-    questionScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
-    screens.add(new Pair<>(questionPane, questionScene));
+		// Set up all our different scenes
+		// First, setup our start scene
+		screens = new ArrayList<>();
 
-    EndPane endPane = new EndPane(this);
-    Scene endScene = new Scene(endPane, WINDOW_WIDTH, WINDOW_HEIGHT);
-    // CSS Styling
-    endScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
-    screens.add(new Pair<>(endPane, endScene));
+		StartPane startPane = new StartPane(this);
+		Scene startScene = new Scene(startPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+		// CSS styling
+		startScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
+		screens.add(new Pair<>(startPane, startScene));
 
-    SavePane savePane = new SavePane(this);
-    Scene saveScene = new Scene(savePane, WINDOW_WIDTH, WINDOW_HEIGHT);
-    // CSS Styling
-    saveScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
-    screens.add(new Pair<>(savePane, saveScene));
+		QuestionPane questionPane = new QuestionPane(this);
+		Scene questionScene = new Scene(questionPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+		// CSS Styling
+		questionScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
+		screens.add(new Pair<>(questionPane, questionScene));
 
-    switchScreen(AppScreen.START_SCREEN);
-  }
+		EndPane endPane = new EndPane(this);
+		Scene endScene = new Scene(endPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+		// CSS Styling
+		endScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
+		screens.add(new Pair<>(endPane, endScene));
 
-  // This function uses the primaryStage we stored earlier to switch scenes. This has the
-  // advantage that every Pane object which also contains a reference to this class (such as all
-  // the panes created so far for this project) can just call switchScreen() anywhere in the code.
-  public void switchScreen(AppScreen screen) {
-    int screenIndex = -1;
-    switch (screen) {
-      case START_SCREEN: screenIndex = 0; break;
-      case QUESTION_SCREEN: screenIndex = 1; break;
-      case END_SCREEN: screenIndex = 2; break;
-      case SAVE_SCREEN: screenIndex = 3; break;
-    }
-    Pair<Pane, Scene> sceneToShow = screens.get(screenIndex);
-    primaryStage.setScene(sceneToShow.getValue());
-    ((QScene) sceneToShow.getKey()).onShown();
+		SavePane savePane = new SavePane(this);
+		Scene saveScene = new Scene(savePane, WINDOW_WIDTH, WINDOW_HEIGHT);
+		// CSS Styling
+		saveScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
+		screens.add(new Pair<>(savePane, saveScene));
+		
+		NewQuestionPane newQuestionPane = new NewQuestionPane(this);
+		Scene newQuestionScene = new Scene(newQuestionPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+		// CSS Styling
+		newQuestionScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
+		screens.add(new Pair<>(newQuestionPane, newQuestionScene));
 
-    primaryStage.show();
-  }
+		switchScreen(AppScreen.START_SCREEN);
+	}
 
-  public Stage getPrimaryStage() {
-    return primaryStage;
-  }
+	// This function uses the primaryStage we stored earlier to switch scenes. This
+	// has the
+	// advantage that every Pane object which also contains a reference to this
+	// class (such as all
+	// the panes created so far for this project) can just call switchScreen()
+	// anywhere in the code.
+	public void switchScreen(AppScreen screen) {
+		int screenIndex = -1;
+		switch (screen) {
+		case START_SCREEN:
+			screenIndex = 0;
+			break;
+		case QUESTION_SCREEN:
+			screenIndex = 1;
+			break;
+		case END_SCREEN:
+			screenIndex = 2;
+			break;
+		case SAVE_SCREEN:
+			screenIndex = 3;
+			break;
+		case NEWQUESTION_SCREEN:
+			screenIndex = 4;
+			break;
+		}
+		Pair<Pane, Scene> sceneToShow = screens.get(screenIndex);
+		primaryStage.setScene(sceneToShow.getValue());
+		((QScene) sceneToShow.getKey()).onShown();
 
-  public HashMap<String, List<Question>> getQuestionDb() {
-    return questionDb;
-  }
+		primaryStage.show();
+	}
 
-  public void setQuestionDb(HashMap<String, List<Question>> questionDb) {
-    this.questionDb = questionDb;
-  }
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
 
-  public List<String> getSelectedTopics() {
-    return selectedTopics;
-  }
+	public HashMap<String, List<Question>> getQuestionDb() {
+		return questionDb;
+	}
 
-  public static void main(String[] args) {
-    launch(args);
-  }
-  
-  public void setCorrectAnswers(int correct) {
-    this.correctAnswers = correct;
-  }
+	public void setQuestionDb(HashMap<String, List<Question>> questionDb) {
+		this.questionDb = questionDb;
+	}
+
+	public List<String> getSelectedTopics() {
+		return selectedTopics;
+	}
+
+	public int getTotalQuestions() {
+		return totalQuestions;
+	}
+
+	public int getQuestionsCorrect() {
+		return questionsCorrect;
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	public void setCorrectAnswers(int correct) {
+		this.correctAnswers = correct;
+	}
 }

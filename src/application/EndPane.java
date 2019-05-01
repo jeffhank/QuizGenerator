@@ -22,7 +22,11 @@ public class EndPane extends BorderPane {
 	}
 
 	private void setupLayout() {
-		Label titleLabel = new Label("Final Score: ");
+
+		Label titleLabel = new Label(
+				"Final Score: " + application.getQuestionsCorrect() + "/" + application.getTotalQuestions() + "("
+						+ (double) (application.getQuestionsCorrect() / application.getTotalQuestions()) * 100 + "%)");
+
 		titleLabel.setPadding(new Insets(12));
 		titleLabel.setStyle("-fx-font: 30 arial;");
 		this.setTop(titleLabel);
