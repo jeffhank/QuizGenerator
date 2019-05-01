@@ -42,7 +42,7 @@ public class QuizApplication extends Application {
     Scene saveScene = new Scene(savePane, WINDOW_WIDTH, WINDOW_HEIGHT);
     screens.add(new Pair<>(savePane, saveScene));
 
-    switchScreen(AppScreen.END_SCREEN);
+    switchScreen(AppScreen.START_SCREEN);
   }
 
   // This function uses the primaryStage we stored earlier to switch scenes. This has the
