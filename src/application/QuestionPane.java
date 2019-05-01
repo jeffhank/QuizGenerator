@@ -84,8 +84,8 @@ public class QuestionPane extends BorderPane {
     this.titleLabel.setText(String.format("Question %d out of %d", questionIndex + 1,
             questions.size()));
 
-    System.out.println(newQuestion.toString());
-    Image newImage = new Image("file:../resources/" + newQuestion.getImage(), 200, 200, false,
+    System.out.println(newQuestion.getImage());
+    Image newImage = new Image(newQuestion.getImage(), 200, 200, false,
             false);
     this.myImageView.setImage(newImage);
     this.questionLabel.setText(newQuestion.getQuestionText());
@@ -95,7 +95,7 @@ public class QuestionPane extends BorderPane {
       Answer answer = answers.get(i);
       RadioButton answerButton = new RadioButton(answer.getChoice());
       answerButton.setToggleGroup(answerGroup);
-      questionGrid.add(answerButton, 0, i);
+      questionGrid.add(answerButton, 0, i + 1);
     }
   }
 
