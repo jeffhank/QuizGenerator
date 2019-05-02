@@ -1,7 +1,11 @@
 package application;
 
+import application.scenes.EndPane;
+import application.scenes.NewQuestionPane;
+import application.scenes.QuestionPane;
+import application.scenes.SavePane;
+import application.scenes.StartPane;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -70,12 +74,9 @@ public class QuizApplication extends Application {
     switchScreen(AppScreen.START_SCREEN);
   }
 
-  // This function uses the primaryStage we stored earlier to switch scenes. This
-  // has the
-  // advantage that every Pane object which also contains a reference to this
-  // class (such as all
-  // the panes created so far for this project) can just call switchScreen()
-  // anywhere in the code.
+  // This function uses the primaryStage we stored earlier to switch scenes. This has the
+  // advantage that every Pane object which also contains a reference to this class (such as all
+  // the panes created so far for this project) can just call switchScreen() anywhere in the code.
   public void switchScreen(AppScreen screen) {
     int screenIndex = -1;
     switch (screen) {
@@ -115,13 +116,13 @@ public class QuizApplication extends Application {
   }
   
   public void addToQuestionDb(String topic, Question newQuestion) {
-    if(questionDb.containsKey(topic) == true) {
+    if(questionDb.containsKey(topic)) {
       List<Question> questions = questionDb.get(topic);
       questions.add(newQuestion);
       questionDb.put(topic, questions);
     }
     else {
-      List<Question> questions = new ArrayList<Question>();
+      List<Question> questions = new ArrayList<>();
       questions.add(newQuestion);
       questionDb.put(topic, questions);
     }

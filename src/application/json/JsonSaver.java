@@ -1,4 +1,4 @@
-package application;
+package application.json;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import application.Question;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

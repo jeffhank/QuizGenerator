@@ -1,5 +1,10 @@
-package application;
+package application.scenes;
 
+import application.AppScreen;
+import application.json.JsonLoader;
+import application.QScene;
+import application.Question;
+import application.QuizApplication;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -59,17 +64,20 @@ public class StartPane extends BorderPane implements QScene {
     Button addNewQuestionButton = new Button("Add A New Question");
 
     Button generateButton = new Button("Generate Quiz");
-    
+
     addQuestionsButton.setOnAction(event -> {
       FileChooser fileChooser = new FileChooser();
       fileChooser.setTitle("Select Questions");
       fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Questions JSON " + "file", "*.json"));
-      File chosenFile = fileChooser.showOpenDialog(application.getPrimaryStage());
+      List<File> chosenFile = fileChooser.showOpenMultipleDialog(application.getPrimaryStage());
       if (chosenFile != null) {
-        fileSelectedLabel.setText(chosenFile.getName());
+        fileSelectedLabel.setText(String.format("%d file%s selected", chosenFile.size(),
+                chosenFile.size() != 1 ? "s" : ""));
         try {
-          JsonLoader loader = new JsonLoader(chosenFile.getPath());
-          parsedDb = loader.getParsedDb();
+          JsonLoader loader = chosenFile.size() > 1
+                  ? new JsonLoader(chosenFile)
+                  : new JsonLoader(chosenFile.get(0).getPath());
+          parsedDb = loader.getQuestionDb();
           application.setQuestionDb(parsedDb);
 
           updateTopicList();
@@ -90,6 +98,7 @@ public class StartPane extends BorderPane implements QScene {
           ex.printStackTrace();
         }
       }
+
     });
 
     generateButton.setVisible(false);
@@ -102,8 +111,8 @@ public class StartPane extends BorderPane implements QScene {
 
     generateButton.setId("gb");
     addNewQuestionButton.setOnAction(event -> {
-        application.switchScreen(AppScreen.NEWQUESTION_SCREEN);
-      });
+      application.switchScreen(AppScreen.NEWQUESTION_SCREEN);
+    });
     buttonGrid.add(addQuestionsButton, 0, 0);
     buttonGrid.add(addNewQuestionButton, 0, 1);
     buttonGrid.add(fileSelectedLabel, 1, 0);
@@ -134,7 +143,7 @@ public class StartPane extends BorderPane implements QScene {
     }
     return ret;
   }
-  
+
   public void updateTopicList() {
     topicBoxes.clear();
     topicGrid.getChildren().clear();

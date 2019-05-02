@@ -1,14 +1,17 @@
-package application;
+package application.scenes;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
+import application.Answer;
+import application.AppScreen;
+import application.QScene;
+import application.Question;
+import application.QuizApplication;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -36,7 +39,7 @@ public class NewQuestionPane extends BorderPane implements QScene {
     /**
      * 
      * constructor that initializes the application and calls setupLayout()
-     * @param QuizApplication to be used for this window screen
+     * @param application to be used for this window screen
      *
      */
 	public NewQuestionPane(QuizApplication application) {
