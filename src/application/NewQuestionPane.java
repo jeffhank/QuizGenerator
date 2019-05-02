@@ -37,6 +37,8 @@ public class NewQuestionPane extends BorderPane implements QScene {
 	}
 	
 	private void firstQuestions() {
+	    numChoices = -1;
+	    answerList = new ArrayList<Answer>();
 	    grid.getChildren().clear();
 	    this.getChildren().clear();
 	    Label titleLabel = new Label("Add A New Question");
@@ -156,6 +158,7 @@ public class NewQuestionPane extends BorderPane implements QScene {
 	    }
 	    application.addToQuestionDb(topicString, newQuestion);
 	    application.getStartScene().updateTopicList();
+	    firstQuestions();
 	    application.switchScreen(AppScreen.START_SCREEN);
 	  });
 	  this.setAlignment(backButton, Pos.BOTTOM_LEFT);
