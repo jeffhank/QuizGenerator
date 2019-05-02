@@ -111,6 +111,19 @@ public class QuizApplication extends Application {
   public void setQuestionDb(HashMap<String, List<Question>> questionDb) {
     this.questionDb = questionDb;
   }
+  
+  public void addToQuestionDb(String topic, Question newQuestion) {
+    if(questionDb.containsKey(topic) == true) {
+      List<Question> questions = questionDb.get(topic);
+      questions.add(newQuestion);
+      questionDb.put(topic, questions);
+    }
+    else {
+      List<Question> questions = new ArrayList<Question>();
+      questions.add(newQuestion);
+      questionDb.put(topic, questions);
+    }
+  }
 
   public List<String> getSelectedTopics() {
     return selectedTopics;

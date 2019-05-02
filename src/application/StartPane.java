@@ -22,7 +22,9 @@ import java.util.List;
 public class StartPane extends BorderPane implements QScene {
 
   private QuizApplication application;
-  private List<CheckBox> topicBoxes;
+  private static List<CheckBox> topicBoxes;
+  private static HashMap<String, List<Question>> parsedDb;
+  private static GridPane topicGrid = new GridPane();
 
   public StartPane(QuizApplication application) {
     this.application = application;
@@ -38,7 +40,6 @@ public class StartPane extends BorderPane implements QScene {
     BorderPane.setAlignment(titleLabel, Pos.CENTER);
 
     GridPane numQuestionsPane = new GridPane();
-    GridPane topicGrid = new GridPane();
     GridPane buttonGrid = new GridPane();
 
     topicGrid.setVisible(false);
@@ -68,20 +69,10 @@ public class StartPane extends BorderPane implements QScene {
         fileSelectedLabel.setText(chosenFile.getName());
         try {
           JsonLoader loader = new JsonLoader(chosenFile.getPath());
-          HashMap<String, List<Question>> parsedDb = loader.getParsedDb();
+          parsedDb = loader.getParsedDb();
           application.setQuestionDb(parsedDb);
 
-          // Update the topic list
-          String[] topicSet = parsedDb.keySet().toArray(new String[parsedDb.size()]);
-
-          // Sort the topic list alphabetically
-          Arrays.sort(topicSet);
-          for (int i = 0; i < topicSet.length; i++) {
-            CheckBox tBox = new CheckBox(topicSet[i]);
-            tBox.setSelected(true);
-            topicGrid.add(tBox, 0, i + 1);
-            topicBoxes.add(tBox);
-          }
+          updateTopicList();
 
           topicGrid.setVisible(true);
           numQuestionsPane.setVisible(true);
@@ -142,6 +133,21 @@ public class StartPane extends BorderPane implements QScene {
         ret.add(topicBox.getText());
     }
     return ret;
+  }
+  
+  public static void updateTopicList() {
+    // Update the topic list
+    topicGrid.getChildren().clear();
+    String[] topicSet = parsedDb.keySet().toArray(new String[parsedDb.size()]);
+
+    // Sort the topic list alphabetically
+    Arrays.sort(topicSet);
+    for (int i = 0; i < topicSet.length; i++) {
+      CheckBox tBox = new CheckBox(topicSet[i]);
+      tBox.setSelected(true);
+      topicGrid.add(tBox, 0, i + 1);
+      topicBoxes.add(tBox);
+    }
   }
 
   @Override
