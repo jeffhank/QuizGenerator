@@ -110,11 +110,6 @@ public class QuestionPane extends BorderPane implements QScene {
     System.out.println(newQuestion.getImage());
     if(newQuestion.getImage().equals("none")) {
       imageGrid.getChildren().clear();
-      Image image = new Image("resources/no_image.png", 200, 200, false, false);
-      myImageView = new ImageView();
-      myImageView.setImage(image);
-      myImageView.setPreserveRatio(true);
-      imageGrid.add(myImageView, 0, 0);
     }
     else {
       imageGrid.getChildren().clear();
@@ -141,7 +136,7 @@ public class QuestionPane extends BorderPane implements QScene {
           Image correct = new Image("resources/correct.jpg", 30, 30, false, false);
           ImageView incorrectOrCorrect = new ImageView();
           incorrectOrCorrect.setImage(correct);
-          myImageView.setPreserveRatio(true);
+          incorrectOrCorrect.setPreserveRatio(true);
           questionGrid.add(incorrectOrCorrect, 1, row);
         }
         else {
@@ -149,7 +144,7 @@ public class QuestionPane extends BorderPane implements QScene {
           Image incorrect = new Image("resources/incorrect.png", 20, 20, false, false);
           ImageView incorrectOrCorrect = new ImageView();
           incorrectOrCorrect.setImage(incorrect);
-          myImageView.setPreserveRatio(true);
+          incorrectOrCorrect.setPreserveRatio(true);
           questionGrid.add(incorrectOrCorrect, 1, row);
         }
         
