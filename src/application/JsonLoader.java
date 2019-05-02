@@ -1,4 +1,4 @@
-package application.json;
+package application;
 
 import application.Answer;
 import application.Question;

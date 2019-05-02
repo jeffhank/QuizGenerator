@@ -1,4 +1,4 @@
-package application.scenes;
+package application;
 
 import application.AppScreen;
 import application.QScene;

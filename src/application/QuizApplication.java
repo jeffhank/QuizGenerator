@@ -1,10 +1,5 @@
 package application;
 
-import application.scenes.EndPane;
-import application.scenes.NewQuestionPane;
-import application.scenes.QuestionPane;
-import application.scenes.SavePane;
-import application.scenes.StartPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -26,6 +21,7 @@ public class QuizApplication extends Application {
 
   private List<String> selectedTopics;
   private int totalQuestions;
+  private int questionsWanted;
   private Scene startScene;
 
   /**
@@ -157,5 +153,9 @@ public class QuizApplication extends Application {
 
   public void setSelectedTopics(List<String> selectedTopics) {
     this.selectedTopics = selectedTopics;
+  }
+
+  public void setQuestionsWanted(int questionsWanted) {
+    this.questionsWanted = questionsWanted;
   }
 }

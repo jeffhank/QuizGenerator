@@ -1,10 +1,5 @@
-package application.scenes;
+package application;
 
-import application.AppScreen;
-import application.json.JsonLoader;
-import application.QScene;
-import application.Question;
-import application.QuizApplication;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -103,10 +98,25 @@ public class StartPane extends BorderPane implements QScene {
 
     generateButton.setVisible(false);
     addNewQuestionButton.setVisible(false);
+    Label numQuestionsLabel = new Label("How many questions?");
+    TextField numQuestions = new TextField();
+
     generateButton.setOnAction(event -> {
+      // Set the amount of quiz questions
+      try {
+        int questionsWanted = Integer.parseInt(numQuestions.getText());
+
+        application.setSelectedTopics(setTopics());
+        application.setQuestionsWanted(questionsWanted);
+        application.switchScreen(AppScreen.QUESTION_SCREEN);
+      } catch (NumberFormatException ex) {
+        Alert invalidQNumber = new Alert(Alert.AlertType.ERROR);
+        invalidQNumber.setTitle("Invalid input");
+        invalidQNumber.setContentText("Error parsing amount of questions. The amount of " +
+                "questions must be an integer greater than 0");
+        invalidQNumber.show();
+      }
       // Get the topics chosen by the user
-      application.setSelectedTopics(setTopics());
-      application.switchScreen(AppScreen.QUESTION_SCREEN);
     });
 
     generateButton.setId("gb");
@@ -122,8 +132,6 @@ public class StartPane extends BorderPane implements QScene {
     buttonGrid.setAlignment(Pos.CENTER);
 
     numQuestionsPane.setVisible(false);
-    Label numQuestionsLabel = new Label("How many questions?");
-    TextField numQuestions = new TextField();
 
     numQuestionsPane.add(numQuestionsLabel, 0, 0);
     numQuestionsPane.add(numQuestions, 0, 1);

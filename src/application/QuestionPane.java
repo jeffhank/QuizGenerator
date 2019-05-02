@@ -1,4 +1,4 @@
-package application.scenes;
+package application;
 
 import application.Answer;
 import application.AppScreen;
@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuestionPane extends BorderPane implements QScene {
-
   private QuizApplication application;
   private GridPane imageGrid;
   private Label titleLabel;
@@ -33,6 +32,7 @@ public class QuestionPane extends BorderPane implements QScene {
   private Button nextButton;
   private int currentQuestionIndex;
   private int correctAnswers;
+  private List<Question> questions;
 
   public QuestionPane(QuizApplication application) {
     this.application = application;
@@ -42,6 +42,20 @@ public class QuestionPane extends BorderPane implements QScene {
     this.correctAnswers = 0;
     setupComponents();
     setupEventHandlers();
+  }
+
+  public void setupQuestionDb() {
+    HashMap<String, List<Question>> questionDb = application.getQuestionDb();
+    HashMap<String, List<Question>> filteredQuestionDb = new HashMap<>();
+    List<String> topicsWanted = application.getSelectedTopics();
+
+    int questionsPerTopic
+    for (String topic : topicsWanted) {
+      filteredQuestionDb.put(topic, questionDb.get(topic));
+    }
+
+    this.questions = filteredQuestionDb.values().stream()
+            .flatMap(List::stream).collect(Collectors.toList());
   }
 
   public void setupComponents() {
@@ -79,16 +93,7 @@ public class QuestionPane extends BorderPane implements QScene {
     questionGrid.getChildren().removeIf(child -> child instanceof ImageView);
     System.out.println(questionIndex);
 
-    HashMap<String, List<Question>> questionDb = application.getQuestionDb();
-    HashMap<String, List<Question>> filteredQuestionDb = new HashMap<>();
-    List<String> topicsWanted = application.getSelectedTopics();
 
-    for (String topic : topicsWanted) {
-      filteredQuestionDb.put(topic, questionDb.get(topic));
-    }
-
-    List<Question> questions = filteredQuestionDb.values().stream()
-            .flatMap(List::stream).collect(Collectors.toList());
     System.out.println(questions);
 
     if (questionIndex > questions.size() - 1) {
@@ -98,7 +103,6 @@ public class QuestionPane extends BorderPane implements QScene {
       currentQuestionIndex = 0;
       correctAnswers = 0;
       application.switchScreen(AppScreen.END_SCREEN);
-
 
       return;
     }
@@ -157,13 +161,13 @@ public class QuestionPane extends BorderPane implements QScene {
     }
   }
 
-
   private void setupEventHandlers() {
 
   }
 
   @Override
   public void onShown() {
+    setupQuestionDb();
     updateQuestionView(currentQuestionIndex);
   }
 }
