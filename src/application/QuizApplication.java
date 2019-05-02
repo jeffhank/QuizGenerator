@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -21,6 +22,7 @@ public class QuizApplication extends Application {
 
   private List<String> selectedTopics;
   private int totalQuestions;
+  private Scene startScene;
 
   /**
    * @param primaryStage is the java fx Stage that runs the program
@@ -36,7 +38,7 @@ public class QuizApplication extends Application {
     screens = new ArrayList<>();
 
     StartPane startPane = new StartPane(this);
-    Scene startScene = new Scene(startPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    startScene = new Scene(startPane, WINDOW_WIDTH, WINDOW_HEIGHT);
     // CSS styling
     startScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(startPane, startScene));
@@ -124,7 +126,10 @@ public class QuizApplication extends Application {
       questionDb.put(topic, questions);
     }
   }
-
+  public StartPane getStartScene() {
+    return (StartPane) startScene.getRoot();
+  }
+  
   public List<String> getSelectedTopics() {
     return selectedTopics;
   }

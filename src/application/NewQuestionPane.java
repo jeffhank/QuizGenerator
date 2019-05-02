@@ -155,7 +155,7 @@ public class NewQuestionPane extends BorderPane implements QScene {
 	      }
 	    }
 	    application.addToQuestionDb(topicString, newQuestion);
-	    StartPane.updateTopicList();
+	    application.getStartScene().updateTopicList();
 	    application.switchScreen(AppScreen.START_SCREEN);
 	  });
 	  this.setAlignment(backButton, Pos.BOTTOM_LEFT);

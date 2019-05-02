@@ -22,9 +22,9 @@ import java.util.List;
 public class StartPane extends BorderPane implements QScene {
 
   private QuizApplication application;
-  private static List<CheckBox> topicBoxes;
-  private static HashMap<String, List<Question>> parsedDb;
-  private static GridPane topicGrid = new GridPane();
+  private List<CheckBox> topicBoxes;
+  private HashMap<String, List<Question>> parsedDb;
+  private GridPane topicGrid = new GridPane();
 
   public StartPane(QuizApplication application) {
     this.application = application;
@@ -135,8 +135,8 @@ public class StartPane extends BorderPane implements QScene {
     return ret;
   }
   
-  public static void updateTopicList() {
-    // Update the topic list
+  public void updateTopicList() {
+    topicBoxes.clear();
     topicGrid.getChildren().clear();
     String[] topicSet = parsedDb.keySet().toArray(new String[parsedDb.size()]);
 
