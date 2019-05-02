@@ -74,6 +74,15 @@ public class Question {
   public ArrayList<Answer> getChoiceArray() {
     return choiceArray;
   }
+  
+  /**
+   * method that adds an answer to the Question
+   * 
+   * @param a is the answer to add
+   */
+  public void addAnswer(Answer a) {
+    choiceArray.add(a);
+  }
 
   /**
    * returns the String format of the question class
