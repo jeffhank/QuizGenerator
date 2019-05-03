@@ -83,6 +83,7 @@ public class SavePane extends BorderPane implements QScene {
       File dFile = saveDialog.showSaveDialog(application.getPrimaryStage());
       if (dFile != null) {
         destFile = dFile;
+        filename.setText(destFile.getPath());
         saveAndExit.setDisable(false);
       }
     });
