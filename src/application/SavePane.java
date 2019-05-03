@@ -11,12 +11,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 
-import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
 
-public class SavePane extends BorderPane {
+public class SavePane extends BorderPane implements QScene {
 
   private QuizApplication application;
+  private File destFile;
 
   public SavePane(QuizApplication application) {
     this.application = application;
@@ -36,21 +39,51 @@ public class SavePane extends BorderPane {
 
     GridPane grid = new GridPane();
     Button saveAndExit = new Button("Save and exit");
+    Button browse = new Button("Browse...");
     TextField filename = new TextField();
-    grid.add(new Label("Enter filename to save to: "), 0, 0);
+    saveAndExit.setDisable(true);
+
+    // Make the filename field read-only but also normal looking
+    filename.setEditable(false);
+    filename.setMouseTransparent(true);
+    filename.setFocusTraversable(false);
+
+    grid.add(new Label("Filename to save to: "), 0, 0);
+    grid.add(browse, 2, 0);
     grid.add(filename, 1, 0);
-    grid.add(saveAndExit, 0, 1);
-    // Setting up the alert that they have saved and exited
+    grid.add(saveAndExit, 1, 1);
+
     Alert alert2 = new Alert(AlertType.INFORMATION);
     alert2.setTitle("Saving and exiting");
     alert2.setContentText("You are saving to your given file and exiting. Thanks for taking the quiz. Goodbye!");
     // Action event to cause the save and exit
     saveAndExit.setOnAction(a -> {
-      if (!filename.getText().equals("")) {
-        Optional<ButtonType> result = alert2.showAndWait();
-        if (result.get() == ButtonType.OK) {
-          System.exit(0);
-        }
+      try {
+        JsonSaver dbSaver = new JsonSaver(application.getQuestionDb());
+        dbSaver.saveQuestionSetJson(destFile.getPath());
+
+        Alert success = new Alert(AlertType.INFORMATION);
+        success.setTitle("Success");
+        success.setContentText("Successfully saved the JSON file");
+        success.show();
+      } catch (IOException ex) {
+        Alert ioAlert = new Alert(AlertType.ERROR);
+        ioAlert.setTitle("Error saving JSON file");
+        ioAlert.setContentText("There was an error when writing the JSON file.");
+        ioAlert.show();
+      }
+    });
+
+    browse.setOnAction(a -> {
+      FileChooser saveDialog = new FileChooser();
+      saveDialog.setTitle("Save Question Database");
+      saveDialog.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON file", "*" +
+              ".json"));
+
+      File dFile = saveDialog.showSaveDialog(application.getPrimaryStage());
+      if (dFile != null) {
+        destFile = dFile;
+        saveAndExit.setDisable(false);
       }
     });
     // Adding the elements to the screen
@@ -58,4 +91,7 @@ public class SavePane extends BorderPane {
     grid.setAlignment(Pos.CENTER);
 
   }
+
+  @Override
+  public void onShown() { }
 }

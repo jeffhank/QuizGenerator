@@ -11,9 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class QuizApplication extends Application {
-
   private int correctAnswers;
-  private List<Pair<Pane, Scene>> screens;
+  private List<Pair<QScene, Scene>> screens;
   final int WINDOW_WIDTH = 800;
   final int WINDOW_HEIGHT = 600;
   private Stage primaryStage;
@@ -92,9 +91,12 @@ public class QuizApplication extends Application {
         screenIndex = 4;
         break;
     }
-    Pair<Pane, Scene> sceneToShow = screens.get(screenIndex);
+    Pair<QScene, Scene> sceneToShow = screens.get(screenIndex);
     primaryStage.setScene(sceneToShow.getValue());
-    ((QScene) sceneToShow.getKey()).onShown();
+
+    // Trigger the screen shown callback. This is useful because the onShow() method gives you an
+    // opportunity to initialize components before running dynamic code.
+    sceneToShow.getKey().onShown();
 
     primaryStage.show();
   }

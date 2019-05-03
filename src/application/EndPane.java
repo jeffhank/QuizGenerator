@@ -74,10 +74,6 @@ public class EndPane extends BorderPane implements QScene {
      */
     @Override
     public void onShown() {
-//    Label titleLabel = new Label(
-//        "Final Score: " + application.getQuestionsCorrect() + "/" + application.getTotalQuestions() + " ("
-//            +  ((double)application.getQuestionsCorrect() / application.getTotalQuestions()) * 100 + "%)");
-
         int questionsCorrect = application.getQuestionsCorrect();
         int totalQuestions = application.getTotalQuestions();
 
