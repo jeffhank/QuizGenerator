@@ -143,10 +143,6 @@ public class QuizApplication extends Application {
     return correctAnswers;
   }
 
-  public static void main(String[] args) {
-    launch(args);
-  }
-
   public void setCorrectAnswers(int correct) {
     this.correctAnswers = correct;
   }
@@ -157,5 +153,9 @@ public class QuizApplication extends Application {
 
   public void setQuestionsWanted(int questionsWanted) {
     this.questionsWanted = questionsWanted;
+  }
+
+  public int getQuestionsWanted() {
+    return questionsWanted;
   }
 }

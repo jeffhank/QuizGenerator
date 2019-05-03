@@ -17,8 +17,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class QuestionPane extends BorderPane implements QScene {
@@ -40,6 +43,7 @@ public class QuestionPane extends BorderPane implements QScene {
     this.imageGrid = new GridPane();
     this.nextButton = new Button();
     this.correctAnswers = 0;
+    this.questions = new ArrayList<>();
     setupComponents();
     setupEventHandlers();
   }
@@ -49,13 +53,23 @@ public class QuestionPane extends BorderPane implements QScene {
     HashMap<String, List<Question>> filteredQuestionDb = new HashMap<>();
     List<String> topicsWanted = application.getSelectedTopics();
 
-    int questionsPerTopic
     for (String topic : topicsWanted) {
       filteredQuestionDb.put(topic, questionDb.get(topic));
     }
 
-    this.questions = filteredQuestionDb.values().stream()
-            .flatMap(List::stream).collect(Collectors.toList());
+    int questionsWanted = application.getQuestionsWanted();
+    Set<String> filteredQuestionKeys = questionDb.keySet();
+    Random rand = new Random();
+    System.out.println(questionDb);
+    for (int i = 0; i < questionsWanted; i++) {
+      int randTopicIndex = rand.nextInt(topicsWanted.size());
+      String randTopic = topicsWanted.remove(randTopicIndex);
+      List<Question> randTopicBucket = questionDb.get(randTopic);
+      int randQuestionIndex = rand.nextInt(randTopicBucket.size());
+
+      Question randQuestion = randTopicBucket.remove(randQuestionIndex);
+      questions.add(randQuestion);
+    }
   }
 
   public void setupComponents() {
