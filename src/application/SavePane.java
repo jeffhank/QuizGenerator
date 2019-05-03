@@ -23,7 +23,11 @@ public class SavePane extends BorderPane {
     setupLayout();
   }
 
+  /**
+   * Method to setup our screen
+   */
   private void setupLayout() {
+    // Label and styling to set up saving the quiz
     Label titleLabel = new Label("Save your quiz");
     titleLabel.setPadding(new Insets(12));
     titleLabel.setStyle("-fx-font: 30 arial;");
@@ -36,10 +40,11 @@ public class SavePane extends BorderPane {
     grid.add(new Label("Enter filename to save to: "), 0, 0);
     grid.add(filename, 1, 0);
     grid.add(saveAndExit, 0, 1);
-
+    // Setting up the alert that they have saved and exited
     Alert alert2 = new Alert(AlertType.INFORMATION);
     alert2.setTitle("Saving and exiting");
     alert2.setContentText("You are saving to your given file and exiting. Thanks for taking the quiz. Goodbye!");
+    // Action event to cause the save and exit
     saveAndExit.setOnAction(a -> {
       if (!filename.getText().equals("")) {
         Optional<ButtonType> result = alert2.showAndWait();
@@ -48,7 +53,7 @@ public class SavePane extends BorderPane {
         }
       }
     });
-
+    // Adding the elements to the screen
     this.setCenter(grid);
     grid.setAlignment(Pos.CENTER);
 
