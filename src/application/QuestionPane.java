@@ -24,6 +24,13 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * This class represents the question screen that appears for each question in the quiz. I will
+ * contain the question text, question number, an image, and answer choices for the question.
+ * Upon answering, the user will be shown whether they were correct or not and then will be 
+ * allowed to click a next button to move on to the next question. 
+ *
+ */
 public class QuestionPane extends BorderPane implements QScene {
   private QuizApplication application;
   private GridPane imageGrid;
@@ -37,6 +44,10 @@ public class QuestionPane extends BorderPane implements QScene {
   private int correctAnswers;
   private List<Question> questions;
 
+  /**
+   * initlializes all private members
+   * @param QuizApplication object to be instantiated by this pane
+   */
   public QuestionPane(QuizApplication application) {
     this.application = application;
     this.currentQuestionIndex = 0;
@@ -47,21 +58,24 @@ public class QuestionPane extends BorderPane implements QScene {
     setupComponents();
     setupEventHandlers();
   }
-
+  
+  /**
+   * populates the HashMap data structure with question based on the topics selected by the user
+   */
   public void setupQuestionDb() {
     HashMap<String, List<Question>> questionDb = application.getQuestionDb();
     HashMap<String, List<Question>> filteredQuestionDb = new HashMap<>();
     List<String> topicsWanted = application.getSelectedTopics();
 
     for (String topic : topicsWanted) {
-      filteredQuestionDb.put(topic, questionDb.get(topic));
+      filteredQuestionDb.put(topic, questionDb.get(topic)); //adds question to hashMap for each topic
     }
 
     int questionsWanted = application.getQuestionsWanted();
     Set<String> filteredQuestionKeys = questionDb.keySet();
     Random rand = new Random();
     System.out.println(questionDb);
-    for (int i = 0; i < questionsWanted; i++) {
+    for (int i = 0; i < questionsWanted; i++) { //randomly adds each question to the data structure
       int randTopicIndex = rand.nextInt(topicsWanted.size());
       String randTopic = topicsWanted.remove(randTopicIndex);
       List<Question> randTopicBucket = questionDb.get(randTopic);
@@ -71,7 +85,10 @@ public class QuestionPane extends BorderPane implements QScene {
       questions.add(randQuestion);
     }
   }
-
+  
+  /**
+   * sets up the layout of the QuestionPane 
+   */
   public void setupComponents() {
     this.setStyle("-fx-background-color: #FFFFFF;");
     titleLabel = new Label();
@@ -94,14 +111,19 @@ public class QuestionPane extends BorderPane implements QScene {
     this.setCenter(questionGrid);
     questionGrid.setAlignment(Pos.TOP_LEFT);
     nextButton = new Button("Next");
-
+    
+    //when next button is clicked, the next question pane is displayed 
     nextButton.setOnAction(v -> updateQuestionView(++currentQuestionIndex));
     nextButton.setDisable(true);
 
     this.setRight(nextButton);
     BorderPane.setAlignment(nextButton, Pos.BOTTOM_RIGHT);
   }
-
+  
+  /**
+   * updates the screen to display the next question pane in the quiz
+   * @param the question number to be represented by this question pane
+   */
   private void updateQuestionView(int questionIndex) {
     nextButton.setDisable(true);
     questionGrid.getChildren().removeIf(child -> child instanceof ImageView);
@@ -116,7 +138,7 @@ public class QuestionPane extends BorderPane implements QScene {
       application.setTotalQuestions(questions.size());
       currentQuestionIndex = 0;
       correctAnswers = 0;
-      application.switchScreen(AppScreen.END_SCREEN);
+      application.switchScreen(AppScreen.END_SCREEN); //ends quiz if user answered all questions
 
       return;
     }
@@ -126,7 +148,7 @@ public class QuestionPane extends BorderPane implements QScene {
             questions.size()));
     imageGrid.setPadding(new Insets(12));
     this.setLeft(imageGrid);
-    this.setAlignment(imageGrid, Pos.TOP_CENTER);
+    this.setAlignment(imageGrid, Pos.TOP_CENTER); //positions the image
     System.out.println(newQuestion.getImage());
     if (newQuestion.getImage().equals("none")) {
       imageGrid.getChildren().clear();
@@ -138,9 +160,9 @@ public class QuestionPane extends BorderPane implements QScene {
       myImageView.setPreserveRatio(true);
       imageGrid.add(myImageView, 0, 0);
     }
-    this.questionLabel.setText(newQuestion.getQuestionText());
+    this.questionLabel.setText(newQuestion.getQuestionText()); //adds question text at the top 
 
-    List<Answer> answers = newQuestion.getChoiceArray();
+    List<Answer> answers = newQuestion.getChoiceArray(); // list of answer choices for this question
     for (int i = 0; i < answers.size(); i++) {
       Answer answer = answers.get(i);
       RadioButton answerButton = new RadioButton(answer.getChoice());
@@ -150,14 +172,14 @@ public class QuestionPane extends BorderPane implements QScene {
 
       answerButton.setOnAction(a -> {
         questionGrid.getChildren().removeIf(child -> child instanceof ImageView);
-        if (answer.getIsCorrect()) {
+        if (answer.getIsCorrect()) { //displays checkmark indicating answer was correct
           correctAnswers++;
           Image correct = new Image("resources/correct.jpg", 30, 30, false, false);
           ImageView incorrectOrCorrect = new ImageView();
           incorrectOrCorrect.setImage(correct);
           incorrectOrCorrect.setPreserveRatio(true);
           questionGrid.add(incorrectOrCorrect, 1, row);
-        } else {
+        } else { //if answer is wrong, displays red X for the user
           System.out.println("false");
           Image incorrect = new Image("resources/incorrect.png", 20, 20, false, false);
           ImageView incorrectOrCorrect = new ImageView();
@@ -165,7 +187,8 @@ public class QuestionPane extends BorderPane implements QScene {
           incorrectOrCorrect.setPreserveRatio(true);
           questionGrid.add(incorrectOrCorrect, 1, row);
         }
-
+        
+        //disables answer choices when user has chosen an answer, allows user to click next button
         answerGroup.getToggles().forEach(toggle -> {
           Node node = (Node) toggle;
           node.setDisable(true);
