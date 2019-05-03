@@ -22,8 +22,8 @@ import java.util.List;
 public class StartPane extends BorderPane implements QScene {
 
   private QuizApplication application;
-  private List<CheckBox> topicBoxes;
-  private HashMap<String, List<Question>> parsedDb;
+  private List<CheckBox> topicBoxes; // Different topics of potential choices
+  private HashMap<String, List<Question>> parsedDb; // List of questions
   private GridPane topicGrid = new GridPane();
 
   public StartPane(QuizApplication application) {
@@ -34,6 +34,7 @@ public class StartPane extends BorderPane implements QScene {
 
   private void setupLayout() {
     Label titleLabel = new Label("Quiz Generator");
+    // CSS styling for the label
     titleLabel.setPadding(new Insets(12));
     titleLabel.setStyle("-fx-font: 30 arial;");
     this.setTop(titleLabel);
@@ -42,6 +43,7 @@ public class StartPane extends BorderPane implements QScene {
     GridPane numQuestionsPane = new GridPane();
     GridPane buttonGrid = new GridPane();
 
+    // The topic check boxes
     topicGrid.setVisible(false);
     topicGrid.setPadding(new Insets(12, 12, 12, 12));
     Label topicTitle = new Label("Select Topics");
@@ -51,6 +53,7 @@ public class StartPane extends BorderPane implements QScene {
     this.setLeft(topicGrid);
     topicGrid.setAlignment(Pos.CENTER_LEFT);
 
+    // Lets the user know whether or not a file is selected
     Label fileSelectedLabel = new Label("No file selected");
     fileSelectedLabel.setPadding(new Insets(12));
     fileSelectedLabel.setStyle("-fx-font: 16 arial;");
@@ -61,20 +64,21 @@ public class StartPane extends BorderPane implements QScene {
     Button generateButton = new Button("Generate Quiz");
 
     addQuestionsButton.setOnAction(event -> {
+      // The action event to get the JSON file to the start pane
       FileChooser fileChooser = new FileChooser();
       fileChooser.setTitle("Select Questions");
       fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Questions JSON " + "file", "*.json"));
       List<File> chosenFile = fileChooser.showOpenMultipleDialog(application.getPrimaryStage());
+      // If the file actually has something and can be passed through as a JSON file
       if (chosenFile != null) {
-        fileSelectedLabel.setText(String.format("%d file%s selected", chosenFile.size(),
-                chosenFile.size() != 1 ? "s" : ""));
+        fileSelectedLabel
+            .setText(String.format("%d file%s selected", chosenFile.size(), chosenFile.size() != 1 ? "s" : ""));
         try {
-          JsonLoader loader = chosenFile.size() > 1
-                  ? new JsonLoader(chosenFile)
-                  : new JsonLoader(chosenFile.get(0).getPath());
+          JsonLoader loader = chosenFile.size() > 1 ? new JsonLoader(chosenFile)
+              : new JsonLoader(chosenFile.get(0).getPath());
           parsedDb = loader.getQuestionDb();
           application.setQuestionDb(parsedDb);
-
+          // Now that we have the JSON file we can update the topics
           updateTopicList();
 
           topicGrid.setVisible(true);
@@ -82,11 +86,13 @@ public class StartPane extends BorderPane implements QScene {
           generateButton.setVisible(true);
           addNewQuestionButton.setVisible(true);
         } catch (IOException ex) {
+          // If no file could be found or there was a problem reading the file
           Alert ioAlert = new Alert(Alert.AlertType.ERROR);
           ioAlert.setTitle("Error Reading Question DB file");
           ioAlert.setContentText("Could not read question DB.");
           ex.printStackTrace();
         } catch (ParseException ex) {
+          // If the file could not be parced
           Alert ioAlert = new Alert(Alert.AlertType.ERROR);
           ioAlert.setTitle("Error Reading Question DB json");
           ioAlert.setContentText("Error parsing the question database json file.");
@@ -104,16 +110,16 @@ public class StartPane extends BorderPane implements QScene {
     generateButton.setOnAction(event -> {
       // Set the amount of quiz questions
       try {
-        int questionsWanted = Integer.parseInt(numQuestions.getText());
-
-        application.setSelectedTopics(setTopics());
-        application.setQuestionsWanted(questionsWanted);
+        // Starting the quiz
+        int questionsWanted = Integer.parseInt(numQuestions.getText()); // How many questions are on the quiz
+        application.setSelectedTopics(setTopics()); // The topics selected
+        application.setQuestionsWanted(questionsWanted); // Passes how many questions are wanted through our method
         application.switchScreen(AppScreen.QUESTION_SCREEN);
-      } catch (NumberFormatException ex) {
+      } catch (NumberFormatException ex) { // If the user inputs the data in incorrectly
         Alert invalidQNumber = new Alert(Alert.AlertType.ERROR);
         invalidQNumber.setTitle("Invalid input");
-        invalidQNumber.setContentText("Error parsing amount of questions. The amount of " +
-                "questions must be an integer greater than 0");
+        invalidQNumber.setContentText(
+            "Error parsing amount of questions. The amount of " + "questions must be an integer greater than 0");
         invalidQNumber.show();
       }
       // Get the topics chosen by the user
@@ -121,8 +127,10 @@ public class StartPane extends BorderPane implements QScene {
 
     generateButton.setId("gb");
     addNewQuestionButton.setOnAction(event -> {
+      // Switching screens to a different pane
       application.switchScreen(AppScreen.NEWQUESTION_SCREEN);
     });
+    // Adding all the buttons and different java fx elements to the screen
     buttonGrid.add(addQuestionsButton, 0, 0);
     buttonGrid.add(addNewQuestionButton, 0, 1);
     buttonGrid.add(fileSelectedLabel, 1, 0);
@@ -142,7 +150,10 @@ public class StartPane extends BorderPane implements QScene {
 
     this.setStyle("-fx-background-color: #FFFFFF;");
   }
-
+  /**
+   * Creating the list of topics
+   * @return the list of topics
+   */
   public List<String> setTopics() {
     List<String> ret = new ArrayList<>();
     for (CheckBox topicBox : topicBoxes) {
@@ -151,7 +162,9 @@ public class StartPane extends BorderPane implements QScene {
     }
     return ret;
   }
-
+  /**
+   * Updating the topic list when we get our JSON file loaded
+   */
   public void updateTopicList() {
     topicBoxes.clear();
     topicGrid.getChildren().clear();
