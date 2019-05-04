@@ -27,6 +27,7 @@ public class StartPane extends BorderPane implements QScene {
   private GridPane topicGrid = new GridPane();
   private GridPane numQuestionsPane;
   private Label totalQuestionsLabel = new Label();
+  private int totalQuestionsLabelNumber = 0;
 
   public StartPane(QuizApplication application) {
     this.application = application;
@@ -86,6 +87,7 @@ public class StartPane extends BorderPane implements QScene {
           numQuestionsPane.setVisible(true);
           generateButton.setVisible(true);
           addNewQuestionButton.setVisible(true);
+          totalQuestionsLabelNumber = application.getQuestionDb().size();
           totalQuestionsLabel.setText("Total questions: " + application.getQuestionDb().size());
         } catch (IOException ex) {
           // If no file could be found or there was a problem reading the file
@@ -172,6 +174,12 @@ public class StartPane extends BorderPane implements QScene {
         ret.add(topicBox.getText());
     }
     return ret;
+  }
+  public Label getNumQuestionLabel() {
+    return totalQuestionsLabel;
+  }
+  public int getNumQuestionsLabelInt() {
+    return totalQuestionsLabelNumber;
   }
   /**
    * Updating the topic list when we get our JSON file loaded

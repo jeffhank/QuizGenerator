@@ -192,6 +192,9 @@ public class NewQuestionPane extends BorderPane implements QScene {
 	    }
 	    application.addToQuestionDb(topicString, newQuestion); //adds new question to hash table
 	    application.getStartScene().updateTopicList();
+	    int numQuestionsLabelInt = application.getStartScene().getNumQuestionsLabelInt() + 1;
+	    application.getStartScene().getNumQuestionLabel().setText("Total Questions: " + 
+	        numQuestionsLabelInt);
 	    firstQuestions();
 	    application.switchScreen(AppScreen.START_SCREEN);//takes user back to start screen when done
 	  });
