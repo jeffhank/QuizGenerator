@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: aTeam 56
+Class-Path: json-simple-1.1.1.jar
+Main-Class: application.Main
+
