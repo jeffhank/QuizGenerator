@@ -101,7 +101,7 @@ public class QuestionPane extends BorderPane implements QScene {
       questionsWanted = total;
     }
 
-    for (int i = 0; i < questionsWanted; i++) { //randomly adds each question to the data structure
+    for (int i = 0; i < questionsWanted; i++) { //adds each question to the data structure
       for(String topic: topicsWanted) {
         for(Question q: questionDb.get(topic)) {
           if(questions.size() <= questionsWanted)
