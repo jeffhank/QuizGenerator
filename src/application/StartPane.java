@@ -175,12 +175,21 @@ public class StartPane extends BorderPane implements QScene {
     }
     return ret;
   }
+  
+  /**
+   * @return number of question label
+   */
   public Label getNumQuestionLabel() {
     return totalQuestionsLabel;
   }
+  
+  /**
+   * @return number of question label's integer
+   */
   public int getNumQuestionsLabelInt() {
     return totalQuestionsLabelNumber;
   }
+  
   /**
    * Updating the topic list when we get our JSON file loaded
    */

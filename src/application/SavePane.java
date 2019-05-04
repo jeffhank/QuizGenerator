@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 public class SavePane extends BorderPane implements QScene {
 
@@ -65,7 +66,10 @@ public class SavePane extends BorderPane implements QScene {
         Alert success = new Alert(AlertType.INFORMATION);
         success.setTitle("Success");
         success.setContentText("Successfully saved the JSON file");
-        success.show();
+        Optional<ButtonType> result = success.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            System.exit(0);
+        }
       } catch (IOException ex) {
         Alert ioAlert = new Alert(AlertType.ERROR);
         ioAlert.setTitle("Error saving JSON file");
