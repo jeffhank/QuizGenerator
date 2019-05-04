@@ -38,6 +38,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
+
+/**
+ * 
+ * This class the screen with which the user can save their database
+ * json file
+ *
+ */
 public class SavePane extends BorderPane implements QScene {
 
   private QuizApplication application;

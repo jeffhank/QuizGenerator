@@ -30,6 +30,11 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+/**
+ * 
+ * This class saves questions in the quiz database to a json file
+ *
+ */
 public class JsonSaver {
   private HashMap<String, List<Question>> questionDB;
 

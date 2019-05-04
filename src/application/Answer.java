@@ -21,6 +21,11 @@
 
 package application;
 
+/**
+ * 
+ * This class represents an answer choice for a question
+ *
+ */
 public class Answer {
   private boolean isCorrect;
   private String choice;

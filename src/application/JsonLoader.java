@@ -35,6 +35,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 
+ * This class loads json from a file and adds the questions to the quiz
+ * database
+ *
+ */
 public class JsonLoader {
 
   private HashMap<String, List<Question>> questionDb;

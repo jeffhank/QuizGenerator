@@ -31,6 +31,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 
+ * This class is a master class for the quiz application, containing and managing
+ * all of the different scenes
+ *
+ */
 public class QuizApplication extends Application {
   private int correctAnswers;
   private List<Pair<QScene, Scene>> screens;

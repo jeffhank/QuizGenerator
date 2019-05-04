@@ -40,6 +40,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 
+ * This class represents the first scene in the application, where the user
+ * can upload and add questions, choose topics, and generate their quiz
+ *
+ */
 public class StartPane extends BorderPane implements QScene {
 
   private QuizApplication application;

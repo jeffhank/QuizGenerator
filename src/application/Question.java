@@ -23,6 +23,11 @@ package application;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * This class represents an question in the quiz
+ *
+ */
 public class Question {
   private String metaData;
   private String questionText;
