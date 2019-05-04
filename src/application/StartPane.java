@@ -25,6 +25,8 @@ public class StartPane extends BorderPane implements QScene {
   private List<CheckBox> topicBoxes; // Different topics of potential choices
   private HashMap<String, List<Question>> parsedDb; // List of questions
   private GridPane topicGrid = new GridPane();
+  private GridPane numQuestionsPane;
+  private Label totalQuestionsLabel = new Label();
 
   public StartPane(QuizApplication application) {
     this.application = application;
@@ -40,7 +42,7 @@ public class StartPane extends BorderPane implements QScene {
     this.setTop(titleLabel);
     BorderPane.setAlignment(titleLabel, Pos.CENTER);
 
-    GridPane numQuestionsPane = new GridPane();
+    numQuestionsPane = new GridPane();
     GridPane buttonGrid = new GridPane();
 
     // The topic check boxes
@@ -80,11 +82,11 @@ public class StartPane extends BorderPane implements QScene {
           application.setQuestionDb(parsedDb);
           // Now that we have the JSON file we can update the topics
           updateTopicList();
-
           topicGrid.setVisible(true);
           numQuestionsPane.setVisible(true);
           generateButton.setVisible(true);
           addNewQuestionButton.setVisible(true);
+          totalQuestionsLabel.setText("Total questions: " + application.getQuestionDb().size());
         } catch (IOException ex) {
           // If no file could be found or there was a problem reading the file
           Alert ioAlert = new Alert(Alert.AlertType.ERROR);
@@ -113,8 +115,17 @@ public class StartPane extends BorderPane implements QScene {
         // Starting the quiz
         int questionsWanted = Integer.parseInt(numQuestions.getText()); // How many questions are on the quiz
         application.setSelectedTopics(setTopics()); // The topics selected
-        application.setQuestionsWanted(questionsWanted); // Passes how many questions are wanted through our method
-        application.switchScreen(AppScreen.QUESTION_SCREEN);
+        if(questionsWanted > application.getQuestionDb().size() || questionsWanted < 1) {
+          Alert invalidQNumber = new Alert(Alert.AlertType.ERROR);
+          invalidQNumber.setTitle("Invalid input");
+          invalidQNumber.setContentText(
+              "Please enter a valid amount of questions.");
+          invalidQNumber.show();
+        }
+        else {
+          application.setQuestionsWanted(questionsWanted); // Passes how many questions are wanted through our method
+          application.switchScreen(AppScreen.QUESTION_SCREEN);
+        }
       } catch (NumberFormatException ex) { // If the user inputs the data in incorrectly
         Alert invalidQNumber = new Alert(Alert.AlertType.ERROR);
         invalidQNumber.setTitle("Invalid input");
@@ -140,9 +151,9 @@ public class StartPane extends BorderPane implements QScene {
     buttonGrid.setAlignment(Pos.CENTER);
 
     numQuestionsPane.setVisible(false);
-
     numQuestionsPane.add(numQuestionsLabel, 0, 0);
     numQuestionsPane.add(numQuestions, 0, 1);
+    numQuestionsPane.add(totalQuestionsLabel, 0, 2);
     numQuestionsPane.setVgap(10.0);
     numQuestionsPane.setPadding(new Insets(12));
     this.setRight(numQuestionsPane);
@@ -182,6 +193,6 @@ public class StartPane extends BorderPane implements QScene {
 
   @Override
   public void onShown() {
-    // Do nothing
+    //Do nothing
   }
 }

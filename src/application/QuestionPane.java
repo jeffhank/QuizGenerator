@@ -78,12 +78,24 @@ public class QuestionPane extends BorderPane implements QScene {
     for (int i = 0; i < questionsWanted; i++) { //randomly adds each question to the data structure
       int randTopicIndex = rand.nextInt(topicsWanted.size());
       String randTopic = topicsWanted.get(randTopicIndex);
+      topicsWanted.remove(randTopicIndex);
       List<Question> randTopicBucket = questionDb.get(randTopic);
       int randQuestionIndex = rand.nextInt(randTopicBucket.size());
 
       Question randQuestion = randTopicBucket.get(randQuestionIndex);
       questions.add(randQuestion);
     }
+    ArrayList<Question> noDuplicates = new ArrayList<Question>();
+    for(Question question: questions) {
+      if(!noDuplicates.contains(question))
+        noDuplicates.add(question);
+    }
+    if(noDuplicates.size() > questionsWanted) {
+      for(int i=0; i<=noDuplicates.size() - questionsWanted; i++) { 
+        noDuplicates.remove(i);
+      }
+    }
+    questions = noDuplicates;
   }
 
   /**
