@@ -77,35 +77,39 @@ public class QuestionPane extends BorderPane implements QScene {
    * populates the HashMap data structure with question based on the topics selected by the user
    */
   public void setupQuestionDb() {
+    questions.clear();
     HashMap<String, List<Question>> questionDb = application.getQuestionDb();
     List<String> topicsWanted = application.getSelectedTopics();
     assert(topicsWanted.size() == questionDb.keySet().size());
     System.out.println(topicsWanted);
 
     int questionsWanted = application.getQuestionsWanted();
+    System.out.println(questionsWanted);
     Random rand = new Random();
     System.out.println(questionDb);
 
     // Calculate total number of questions so we don't overshoot the number of questions wanted
     int total = 0;
     for (String topic : questionDb.keySet()) {
-      total += questionDb.get(topic).size();
+      if(topicsWanted.contains(topic))
+        total += questionDb.get(topic).size();
     }
+    
+    System.out.println(total);
 
     if (questionsWanted > total) {
       questionsWanted = total;
     }
 
     for (int i = 0; i < questionsWanted; i++) { //randomly adds each question to the data structure
-      int randTopicIndex = rand.nextInt(topicsWanted.size());
-      String randTopic = topicsWanted.get(randTopicIndex);
-      topicsWanted.remove(randTopicIndex);
-      List<Question> randTopicBucket = questionDb.get(randTopic);
-      int randQuestionIndex = rand.nextInt(randTopicBucket.size());
-
-      Question randQuestion = randTopicBucket.get(randQuestionIndex);
-      questions.add(randQuestion);
+      for(String topic: topicsWanted) {
+        for(Question q: questionDb.get(topic)) {
+          if(questions.size() <= questionsWanted)
+            questions.add(q);
+        }
+      }
     }
+    questions.remove(questions.size() - 1);
     ArrayList<Question> noDuplicates = new ArrayList<Question>();
     for(Question question: questions) {
       if(!noDuplicates.contains(question))

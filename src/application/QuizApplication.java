@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * 
  * This class is a master class for the quiz application, containing and managing
- * all of the different scenes
+ * all of the 
  *
  */
 public class QuizApplication extends Application {
@@ -49,6 +49,7 @@ public class QuizApplication extends Application {
   private int totalQuestions;
   private int questionsWanted;
   private Scene startScene;
+  private Scene questionScene;
 
   /**
    * @param primaryStage is the java fx Stage that runs the program
@@ -70,7 +71,7 @@ public class QuizApplication extends Application {
     screens.add(new Pair<>(startPane, startScene));
 
     QuestionPane questionPane = new QuestionPane(this);
-    Scene questionScene = new Scene(questionPane, WINDOW_WIDTH, WINDOW_HEIGHT);
+    questionScene = new Scene(questionPane, WINDOW_WIDTH, WINDOW_HEIGHT);
     // CSS Styling
     questionScene.getStylesheets().add(getClass().getResource("start_pane.css").toExternalForm());
     screens.add(new Pair<>(questionPane, questionScene));
@@ -155,6 +156,7 @@ public class QuizApplication extends Application {
   public StartPane getStartScene() {
     return (StartPane) startScene.getRoot();
   }
+  
   
   public List<String> getSelectedTopics() {
     return selectedTopics;

@@ -114,8 +114,12 @@ public class StartPane extends BorderPane implements QScene {
           numQuestionsPane.setVisible(true);
           generateButton.setVisible(true);
           addNewQuestionButton.setVisible(true);
-          totalQuestionsLabelNumber = application.getQuestionDb().size();
-          totalQuestionsLabel.setText("Total questions: " + application.getQuestionDb().size());
+          int total = 0;
+          for(String topic: application.getQuestionDb().keySet()) {
+            total += application.getQuestionDb().get(topic).size();
+          }
+          totalQuestionsLabelNumber = total;
+          totalQuestionsLabel.setText("Total questions in DB: " + total);
         } catch (IOException ex) {
           // If no file could be found or there was a problem reading the file
           Alert ioAlert = new Alert(Alert.AlertType.ERROR);
@@ -152,8 +156,12 @@ public class StartPane extends BorderPane implements QScene {
           invalidQNumber.show();
         }
         else {
-          if(questionsWanted > application.getQuestionDb().size()) {
-            questionsWanted = application.getQuestionDb().size();
+          int total = 0;
+          for(String topic: application.getQuestionDb().keySet()) {
+            total += application.getQuestionDb().get(topic).size();
+          }
+          if(questionsWanted > total) {
+            questionsWanted = total;
           }
           application.setQuestionsWanted(questionsWanted); // Passes how many questions are wanted through our method
           application.switchScreen(AppScreen.QUESTION_SCREEN);
@@ -200,9 +208,11 @@ public class StartPane extends BorderPane implements QScene {
   public List<String> setTopics() {
     List<String> ret = new ArrayList<>();
     for (CheckBox topicBox : topicBoxes) {
-      if (topicBox.isSelected())
+      if (topicBox.isSelected()) {
         ret.add(topicBox.getText());
+      }
     }
+    System.out.println(ret);
     return ret;
   }
   
@@ -218,6 +228,10 @@ public class StartPane extends BorderPane implements QScene {
    */
   public int getNumQuestionsLabelInt() {
     return totalQuestionsLabelNumber;
+  }
+  
+  public void setNumQuestionsLabelInt() {
+    totalQuestionsLabelNumber++;
   }
   
   /**
