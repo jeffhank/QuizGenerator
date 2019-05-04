@@ -35,8 +35,10 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * This class represents the question screen that appears for each question in the quiz. I will
@@ -85,7 +87,6 @@ public class QuestionPane extends BorderPane implements QScene {
 
     int questionsWanted = application.getQuestionsWanted();
     System.out.println(questionsWanted);
-    Random rand = new Random();
     System.out.println(questionDb);
 
     // Calculate total number of questions so we don't overshoot the number of questions wanted
@@ -100,16 +101,23 @@ public class QuestionPane extends BorderPane implements QScene {
     if (questionsWanted > total) {
       questionsWanted = total;
     }
-
-    for (int i = 0; i < questionsWanted; i++) { //adds each question to the data structure
+    Random rand = new Random();
+    Set<Question> qSet = new HashSet<Question>();
+    ArrayList<Question> allQ = new ArrayList<Question>();
+    for (int i = 0; i < questionsWanted; i++) { //randomly adds each question to the data structure
       for(String topic: topicsWanted) {
         for(Question q: questionDb.get(topic)) {
-          if(questions.size() <= questionsWanted)
-            questions.add(q);
+            allQ.add(q);
         }
       }
     }
-    questions.remove(questions.size() - 1);
+    while(qSet.size() < questionsWanted) {
+      int nextInt = rand.nextInt(allQ.size());
+      if(qSet.contains(allQ.get(nextInt)) == false);
+        qSet.add(allQ.get(nextInt));
+      allQ.remove(nextInt);
+    }
+    questions.addAll(qSet);
     ArrayList<Question> noDuplicates = new ArrayList<Question>();
     for(Question question: questions) {
       if(!noDuplicates.contains(question))
