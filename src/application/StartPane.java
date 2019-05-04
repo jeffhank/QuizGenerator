@@ -213,6 +213,11 @@ public class StartPane extends BorderPane implements QScene {
       }
     }
     System.out.println(ret);
+    if(ret.size() == 0) {
+      for (CheckBox topicBox : topicBoxes) {
+         ret.add(topicBox.getText());
+      }
+    }
     return ret;
   }
   
