@@ -1,6 +1,6 @@
 //////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
 //
-// Title:           QScene.java
+// Title:           Main.java
 // Course:          Computer Science 400, Spring 2019
 //
 // Author:          ateam56
@@ -21,11 +21,10 @@
 
 package application;
 
-/**
- * interface that contains the onShown() method that is implemented by window pane classes.
- * This method dictates what each pane will do when shown.
- *
- */
-public interface QScene {
-  void onShown();
+import javafx.application.Application;
+
+public class Main {
+  public static void main(String[] args) {
+    Application.launch(QuizApplication.class, args);
+  }
 }

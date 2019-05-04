@@ -1,3 +1,24 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title:           NewQuestionPane.java
+// Course:          Computer Science 400, Spring 2019
+//
+// Author:          ateam56
+// Lecturer's Name: Debra Deppler
+// Due:             05/03/2019 by 12am
+//
+///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
+//
+// Students who get help from sources other than their partner must fully 
+// acknowledge and credit those sources of help here.  Instructors and TAs do 
+// not need to be credited here, but tutors, friends, relatives, room mates, 
+// strangers, and others do.  If you received no outside help from either type
+//  of source, then please explicitly indicate NONE.
+//
+// Persons:         None
+// Online Sources:  None
+//
+
 package application;
 
 import java.util.ArrayList;
@@ -192,6 +213,9 @@ public class NewQuestionPane extends BorderPane implements QScene {
 	    }
 	    application.addToQuestionDb(topicString, newQuestion); //adds new question to hash table
 	    application.getStartScene().updateTopicList();
+	    int numQuestionsLabelInt = application.getStartScene().getNumQuestionsLabelInt() + 1;
+	    application.getStartScene().getNumQuestionLabel().setText("Total Questions: " + 
+	        numQuestionsLabelInt);
 	    firstQuestions();
 	    application.switchScreen(AppScreen.START_SCREEN);//takes user back to start screen when done
 	  });

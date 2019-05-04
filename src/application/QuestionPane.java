@@ -1,10 +1,26 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title:           QuestionPane.java
+// Course:          Computer Science 400, Spring 2019
+//
+// Author:          ateam56
+// Lecturer's Name: Debra Deppler
+// Due:             05/03/2019 by 12am
+//
+///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
+//
+// Students who get help from sources other than their partner must fully 
+// acknowledge and credit those sources of help here.  Instructors and TAs do 
+// not need to be credited here, but tutors, friends, relatives, room mates, 
+// strangers, and others do.  If you received no outside help from either type
+//  of source, then please explicitly indicate NONE.
+//
+// Persons:         None
+// Online Sources:  None
+//
+
 package application;
 
-import application.Answer;
-import application.AppScreen;
-import application.QScene;
-import application.Question;
-import application.QuizApplication;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -21,15 +37,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * This class represents the question screen that appears for each question in the quiz. I will
  * contain the question text, question number, an image, and answer choices for the question.
- * Upon answering, the user will be shown whether they were correct or not and then will be 
- * allowed to click a next button to move on to the next question. 
- *
+ * Upon answering, the user will be shown whether they were correct or not and then will be
+ * allowed to click a next button to move on to the next question.
  */
 public class QuestionPane extends BorderPane implements QScene {
   private QuizApplication application;
@@ -46,7 +59,8 @@ public class QuestionPane extends BorderPane implements QScene {
 
   /**
    * initlializes all private members
-   * @param QuizApplication object to be instantiated by this pane
+   *
+   * @param application object to be instantiated by this pane
    */
   public QuestionPane(QuizApplication application) {
     this.application = application;
@@ -58,36 +72,55 @@ public class QuestionPane extends BorderPane implements QScene {
     setupComponents();
     setupEventHandlers();
   }
-  
+
   /**
    * populates the HashMap data structure with question based on the topics selected by the user
    */
   public void setupQuestionDb() {
     HashMap<String, List<Question>> questionDb = application.getQuestionDb();
-    HashMap<String, List<Question>> filteredQuestionDb = new HashMap<>();
     List<String> topicsWanted = application.getSelectedTopics();
-
-    for (String topic : topicsWanted) {
-      filteredQuestionDb.put(topic, questionDb.get(topic)); //adds question to hashMap for each topic
-    }
+    assert(topicsWanted.size() == questionDb.keySet().size());
+    System.out.println(topicsWanted);
 
     int questionsWanted = application.getQuestionsWanted();
-    Set<String> filteredQuestionKeys = questionDb.keySet();
     Random rand = new Random();
     System.out.println(questionDb);
+
+    // Calculate total number of questions so we don't overshoot the number of questions wanted
+    int total = 0;
+    for (String topic : questionDb.keySet()) {
+      total += questionDb.get(topic).size();
+    }
+
+    if (questionsWanted > total) {
+      questionsWanted = total;
+    }
+
     for (int i = 0; i < questionsWanted; i++) { //randomly adds each question to the data structure
       int randTopicIndex = rand.nextInt(topicsWanted.size());
-      String randTopic = topicsWanted.remove(randTopicIndex);
+      String randTopic = topicsWanted.get(randTopicIndex);
+      topicsWanted.remove(randTopicIndex);
       List<Question> randTopicBucket = questionDb.get(randTopic);
       int randQuestionIndex = rand.nextInt(randTopicBucket.size());
 
-      Question randQuestion = randTopicBucket.remove(randQuestionIndex);
+      Question randQuestion = randTopicBucket.get(randQuestionIndex);
       questions.add(randQuestion);
     }
+    ArrayList<Question> noDuplicates = new ArrayList<Question>();
+    for(Question question: questions) {
+      if(!noDuplicates.contains(question))
+        noDuplicates.add(question);
+    }
+    if(noDuplicates.size() > questionsWanted) {
+      for(int i=0; i<=noDuplicates.size() - questionsWanted; i++) { 
+        noDuplicates.remove(i);
+      }
+    }
+    questions = noDuplicates;
   }
-  
+
   /**
-   * sets up the layout of the QuestionPane 
+   * sets up the layout of the QuestionPane
    */
   public void setupComponents() {
     this.setStyle("-fx-background-color: #FFFFFF;");
@@ -111,7 +144,7 @@ public class QuestionPane extends BorderPane implements QScene {
     this.setCenter(questionGrid);
     questionGrid.setAlignment(Pos.TOP_LEFT);
     nextButton = new Button("Next");
-    
+
     //when next button is clicked, the next question pane is displayed 
     nextButton.setOnAction(v -> updateQuestionView(++currentQuestionIndex));
     nextButton.setDisable(true);
@@ -119,10 +152,11 @@ public class QuestionPane extends BorderPane implements QScene {
     this.setRight(nextButton);
     BorderPane.setAlignment(nextButton, Pos.BOTTOM_RIGHT);
   }
-  
+
   /**
    * updates the screen to display the next question pane in the quiz
-   * @param the question number to be represented by this question pane
+   *
+   * @param questionIndex question number to be represented by this question pane
    */
   private void updateQuestionView(int questionIndex) {
     nextButton.setDisable(true);
@@ -187,7 +221,7 @@ public class QuestionPane extends BorderPane implements QScene {
           incorrectOrCorrect.setPreserveRatio(true);
           questionGrid.add(incorrectOrCorrect, 1, row);
         }
-        
+
         //disables answer choices when user has chosen an answer, allows user to click next button
         answerGroup.getToggles().forEach(toggle -> {
           Node node = (Node) toggle;

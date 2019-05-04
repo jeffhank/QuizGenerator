@@ -1,3 +1,24 @@
+//////////////////// ALL ASSIGNMENTS INCLUDE THIS SECTION /////////////////////
+//
+// Title:           QuizApplication.java
+// Course:          Computer Science 400, Spring 2019
+//
+// Author:          ateam56
+// Lecturer's Name: Debra Deppler
+// Due:             05/03/2019 by 12am
+//
+///////////////////////////// CREDIT OUTSIDE HELP /////////////////////////////
+//
+// Students who get help from sources other than their partner must fully 
+// acknowledge and credit those sources of help here.  Instructors and TAs do 
+// not need to be credited here, but tutors, friends, relatives, room mates, 
+// strangers, and others do.  If you received no outside help from either type
+//  of source, then please explicitly indicate NONE.
+//
+// Persons:         None
+// Online Sources:  None
+//
+
 package application;
 
 import javafx.application.Application;
@@ -10,10 +31,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 
+ * This class is a master class for the quiz application, containing and managing
+ * all of the different scenes
+ *
+ */
 public class QuizApplication extends Application {
-
   private int correctAnswers;
-  private List<Pair<Pane, Scene>> screens;
+  private List<Pair<QScene, Scene>> screens;
   final int WINDOW_WIDTH = 800;
   final int WINDOW_HEIGHT = 600;
   private Stage primaryStage;
@@ -92,9 +118,12 @@ public class QuizApplication extends Application {
         screenIndex = 4;
         break;
     }
-    Pair<Pane, Scene> sceneToShow = screens.get(screenIndex);
+    Pair<QScene, Scene> sceneToShow = screens.get(screenIndex);
     primaryStage.setScene(sceneToShow.getValue());
-    ((QScene) sceneToShow.getKey()).onShown();
+
+    // Trigger the screen shown callback. This is useful because the onShow() method gives you an
+    // opportunity to initialize components before running dynamic code.
+    sceneToShow.getKey().onShown();
 
     primaryStage.show();
   }
