@@ -117,7 +117,7 @@ public class StartPane extends BorderPane implements QScene {
         // Starting the quiz
         int questionsWanted = Integer.parseInt(numQuestions.getText()); // How many questions are on the quiz
         application.setSelectedTopics(setTopics()); // The topics selected
-        if(questionsWanted > application.getQuestionDb().size() || questionsWanted < 1) {
+        if(questionsWanted < 1) {
           Alert invalidQNumber = new Alert(Alert.AlertType.ERROR);
           invalidQNumber.setTitle("Invalid input");
           invalidQNumber.setContentText(
@@ -125,6 +125,9 @@ public class StartPane extends BorderPane implements QScene {
           invalidQNumber.show();
         }
         else {
+          if(questionsWanted > application.getQuestionDb().size()) {
+            questionsWanted = application.getQuestionDb().size();
+          }
           application.setQuestionsWanted(questionsWanted); // Passes how many questions are wanted through our method
           application.switchScreen(AppScreen.QUESTION_SCREEN);
         }
